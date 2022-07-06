@@ -1,0 +1,6 @@
+CREATE DATABASE coffee_shop_db
+CREATE TABLE `coffee_shop_db`.`account` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT ,
+    `email` VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL , PRIMARY KEY (`id`()),
+    `password` VARCHAR(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE = InnoDB;
