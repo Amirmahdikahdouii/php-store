@@ -2,6 +2,12 @@
 <html lang="en">
 <?php
 session_start();
+if (
+    isset($_SESSION['user_login']) &&
+    array_key_exists('user_login', $_SESSION)
+) {
+    header('Location: dashboard.php');
+}
 ?>
 <head>
     <meta charset="UTF-8">
@@ -10,10 +16,17 @@ session_start();
     <title>Login</title>
     <link rel="stylesheet" href="../static/css/login.css"/>
 </head>
-
 <body class="body">
-
 <section class="main-container">
+    <!--  User Not Found Modal  -->
+    <div id="user-not-found-modal" class="user-not-found-modal">
+        <div class="user-not-found-modal-content-container">
+            <h1 class="user-not-found-modal-title">Error</h1>
+            <p class="user-not-found-modal-text">Email or Password Is Not correct</p>
+            <button id="user-not-found-modal-close-button">Close</button>
+        </div>
+    </div>
+    <!--------------------------------------------------------->
     <a class="logo" href="../index.php">Coffee Shop</a>
     <div class="sign-in-up-container">
         <button class="form-title form-title-active" id="login-form-switch-button">Login</button>
@@ -39,18 +52,24 @@ if (isset($_POST['email']) &&
 ) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT WHERE email=`$email` FROM account";
-    if(mysqli_error($sql)){
-        echo '<script>alert("please enter correct email")</script>';
-    }
+    $sql = "SELECT email, password FROM account WHERE email='$email' AND password='$password';";
     $result = mysqli_query($db_connection, $sql);
-    $_SESSION["userLogin"] = true;
-    header("Location: sign-up.php");
-    return True;
+    if (mysqli_num_rows($result) > 0) {
+        $result = mysqli_fetch_assoc($result);
+        $_SESSION['user_login'] = true;
+        // Check This Section later
+        if ($result['is_admin'] == 1) {
+            $_SESSION['user_admin'] = true;
+        }
+    } else {
+        echo "<script>
+                window.addEventListener('load', ()=>{
+                    showUserNotFoundError();
+                })
+            </script>";
+    }
 }
-
 ?>
-
+<script src="../static/js/login.js"></script>
 </body>
-
 </html>

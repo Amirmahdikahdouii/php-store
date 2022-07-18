@@ -32,7 +32,7 @@ a {
 
 body {
     width: 100%;
-    height: 100vh;  
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,12 +99,12 @@ body {
     color: rgb(238, 197, 144);
 }
 
-#sign-in-form-switch-button>a:hover {
+#sign-in-form-switch-button > a:hover {
     transition: all 500ms;
     color: rgb(238, 197, 144);
 }
 
-#sign-in-form-switch-button>a {
+#sign-in-form-switch-button > a {
     color: white;
 }
 
@@ -166,13 +166,98 @@ body {
     font-family: header-main-description;
 }
 
-.rules-acception-text>a {
+.rules-acception-text > a {
     font-weight: bold;
     color: rgb(255, 255, 255);
     cursor: pointer;
 }
 
-@media screen and (max-width:1200px) {
+@keyframes showModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes hideModal {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.user-not-found-modal {
+    display: none;
+    justify-content: center;
+    align-items: flex-start;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, .5);
+    animation-name: hideModal;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+.user-not-found-modal-active {
+    animation-name: showModal;
+    animation-duration: 1000ms;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+}
+
+.user-not-found-modal-content-container {
+    padding: 1%;
+    width: 30%;
+    border-radius: 10px;
+    background-color: #9FC088;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-not-found-modal-title {
+    color: #614124;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: header-main-description;
+}
+
+.user-not-found-modal-text {
+    width: 80%;
+    padding: 1%;
+    border-radius: 10px;
+    font-weight: bold;
+    color: #CC704B;
+    /*background-color: #f74646;*/
+    text-align: center;
+    font-family: header-main-title;
+}
+
+#user-not-found-modal-close-button {
+    margin: 1% 0;
+    padding: 2% 5%;
+    background-color: #CC704B;
+    color: #614124;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: our-commitment-title;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
     .logo {
         font-size: 30px;
     }
@@ -182,7 +267,7 @@ body {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
     .main-container {
         width: 60%;
     }
@@ -195,3 +280,4 @@ body {
         font-size: 18px;
     }
 }
+
