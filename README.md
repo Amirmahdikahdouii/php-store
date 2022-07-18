@@ -10,3 +10,4 @@ to clone project run below command to clone git repository:
 <code>$ git pull https://github.com/Amirmahdikahdouii/php-store_project.git</code>
 # Push Project:
 <code>$ git push https://github.com/Amirmahdikahdouii/php-store_project.git</code>
+commit -m 'hello'
