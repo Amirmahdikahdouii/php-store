@@ -1,3 +1,18 @@
+<?php
+include_once '../settings/dbconfig.php';
+session_start();
+$userId = $_SESSION['user_id'];
+$sql = "SELECT * FROM account WHERE id='$userId';";
+$result = mysqli_query($db_connection, $sql);
+$result = mysqli_fetch_assoc($result);
+$userEmail = $result['email'];
+$userName = $result['name'];
+$userFamilyName = $result['family_name'];
+$userPhoneNumber = $result['phone_number'];
+$userProfileImage = $result['profile_image'];
+$userLocation = $result['location'];
+$userBirthday = $result['birthday'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,12 +47,12 @@
         </div>
 
         <ul class="header-menu" id="header-menu-id">
-            <li class="header-menu-item"><a href="../index.html">Home</a></li>
+            <li class="header-menu-item"><a href="../index.php">Home</a></li>
             <li class="header-menu-item"><a href="#">Menu</a></li>
             <li class="header-menu-item"><a href="#">Blog</a></li>
             <li class="header-menu-item"><a href="#">Shop</a></li>
             <li class="header-menu-item"><a href="./login.php">Account</a></li>
-            <li class="header-menu-item"><a href="./about-us.html">About</a></li>
+            <li class="header-menu-item"><a href="">About</a></li>
             <li class="header-menu-item"><a href="#">Contact</a></li>
             <li class="header-menu-item">
                 <a href="#">
@@ -52,11 +67,10 @@
 
     </nav>
 </header>
-
 <section class="main-section">
     <div class="sideBar-menu-container" id="SideBar-menu-container">
         <div class="sideBar-menu-user-profile-photo-container">
-            <div class="sideBar-menu-user-profile-photo-exit-botton center">
+            <a class="sideBar-menu-user-profile-photo-exit-botton center" href="./logout.php">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                      class="bi bi-box-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
@@ -64,11 +78,22 @@
                     <path fill-rule="evenodd"
                           d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
                 </svg>
-            </div>
+            </a>
             <div class="sideBar-menu-user-profile-photo-holder center">
-                <img src="../img/coffe.jpg" alt="User" class="sideBar-menu-user-profile-photo" width="100%"/>
+                <img src="../media/user-profile-pictures/<?= $userProfileImage ?>" alt="User"
+                     class="sideBar-menu-user-profile-photo" width="100%"/>
             </div>
-            <h3 class="sideBar-menu-user-profile-photo-username">Username</h3>
+            <?php
+            if ($userName !== null) {
+                ?>
+                <h3 class="sideBar-menu-user-profile-photo-username"><?= $userName ?></h3>
+                <?php
+            } else {
+                ?>
+                <h3 class="sideBar-menu-user-profile-photo-username"><?= $userEmail ?></h3>
+                <?php
+            }
+            ?>
         </div>
         <div class="sideBar-menu-items-container center">
             <ul class="sideBar-menu-list">
@@ -94,7 +119,7 @@
                                                     onclick="showContentHandler('main-section-content-container-change-password', 'change-password')"
                                                     id="change-password">Change Password</span></li>
                 <li class="sideBar-menu-item"><span>Settings</span></li>
-                <li class="sideBar-menu-item"><span>Exit</span></li>
+                <li class="sideBar-menu-item"><a href="logout.php">Exit</a></li>
             </ul>
         </div>
     </div>
@@ -105,27 +130,38 @@
             <li class="dashboard-section-info-list-title">
                 <h1>Personal Info</h1>
             </li>
-            <li class="dashboard-section-info-item">
-                <div class="dashboard-section-info-item-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-person" viewBox="0 0 16 16">
-                        <path
-                                d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                    </svg>
-                </div>
-                <span class="dashboard-section-info-item-key">Name:</span>
-                <span class="dashboard-section-info-item-value">Amir Mahdi Kahdouii</span>
-            </li>
-            <li class="dashboard-section-info-item">
-                <div class="dashboard-section-info-item-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-person-fill" viewBox="0 0 16 16">
-                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                </div>
-                <span class="dashboard-section-info-item-key">Birthday:</span>
-                <span class="dashboard-section-info-item-value">2004-03-28</span>
-            </li>
+            <?php
+            if ($userName !== null) {
+                ?>
+                <li class="dashboard-section-info-item">
+                    <div class="dashboard-section-info-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-person" viewBox="0 0 16 16">
+                            <path
+                                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        </svg>
+                    </div>
+                    <span class="dashboard-section-info-item-key">Name:</span>
+                    <span class="dashboard-section-info-item-value"><?= $userName . $userFamilyName ?></span>
+                </li>
+                <?php
+            }
+            if ($userBirthday !== null) {
+                ?>
+                <li class="dashboard-section-info-item">
+                    <div class="dashboard-section-info-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </div>
+                    <span class="dashboard-section-info-item-key">Birthday:</span>
+                    <?php #TODO: make birthday view for user, how to save date on database and convert it for showing ?>
+                    <span class="dashboard-section-info-item-value"><?= $userBirthday ?></span>
+                </li>
+                <?php
+            }
+            ?>
             <li class="dashboard-section-info-item">
                 <div class="dashboard-section-info-item-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
@@ -135,32 +171,42 @@
                     </svg>
                 </div>
                 <span class="dashboard-section-info-item-key">E-Mail:</span>
-                <span class="dashboard-section-info-item-value">example@info.com</span>
+                <span class="dashboard-section-info-item-value"><?= $userEmail ?></span>
             </li>
-            <li class="dashboard-section-info-item">
-                <div class="dashboard-section-info-item-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-phone" viewBox="0 0 16 16">
-                        <path
-                                d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
-                        <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                    </svg>
-                </div>
-                <span class="dashboard-section-info-item-key">Phone:</span>
-                <span class="dashboard-section-info-item-value">+98 903 378-2632</span>
-            </li>
-            <li class="dashboard-section-info-item">
-                <div class="dashboard-section-info-item-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-geo-alt" viewBox="0 0 16 16">
-                        <path
-                                d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
-                        <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                    </svg>
-                </div>
-                <span class="dashboard-section-info-item-key">Loaction:</span>
-                <span class="dashboard-section-info-item-value">Iran, Tehran</span>
-            </li>
+            <?php
+            if ($userPhoneNumber !== null) {
+                ?>
+                <li class="dashboard-section-info-item">
+                    <div class="dashboard-section-info-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-phone" viewBox="0 0 16 16">
+                            <path
+                                    d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z"/>
+                            <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        </svg>
+                    </div>
+                    <span class="dashboard-section-info-item-key">Phone:</span>
+                    <span class="dashboard-section-info-item-value"><?= $userPhoneNumber ?></span>
+                </li>
+                <?php
+            }
+            if ($userLocation !== null) {
+                ?>
+                <li class="dashboard-section-info-item">
+                    <div class="dashboard-section-info-item-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-geo-alt" viewBox="0 0 16 16">
+                            <path
+                                    d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                            <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </div>
+                    <span class="dashboard-section-info-item-key">Location:</span>
+                    <span class="dashboard-section-info-item-value"><?= $userLocation ?></span>
+                </li>
+                <?php
+            }
+            ?>
         </ul>
     </div>
 
@@ -973,8 +1019,8 @@
 </footer>
 
 
-<script src="../js/dashboard.js"></script>
-<script src="../js/header.js"></script>
+<script src="../static/js/dashboard.js"></script>
+<script src="../static/js/header.js"></script>
 
 </body>
 
