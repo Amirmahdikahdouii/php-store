@@ -57,6 +57,7 @@ if (isset($_POST['email']) &&
     if (mysqli_num_rows($result) > 0) {
         $result = mysqli_fetch_assoc($result);
         $_SESSION['user_login'] = true;
+        $_SESSION['user_id'] = $result['id'];
         // Check This Section later
         if ($result['is_admin'] == 1) {
             $_SESSION['user_admin'] = true;
