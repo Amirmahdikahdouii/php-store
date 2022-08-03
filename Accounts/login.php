@@ -52,16 +52,17 @@ if (isset($_POST['email']) &&
 ) {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $sql = "SELECT email, password FROM account WHERE email='$email' AND password='$password';";
+    $sql = "SELECT * FROM account WHERE email='$email' AND password='$password';";
     $result = mysqli_query($db_connection, $sql);
     if (mysqli_num_rows($result) > 0) {
         $result = mysqli_fetch_assoc($result);
+        $_SESSION['user_id'] = intval($result['id']);
         $_SESSION['user_login'] = true;
-        $_SESSION['user_id'] = $result['id'];
         // Check This Section later
-        if ($result['is_admin'] == 1) {
+        if (intval($result['is_admin']) === 1) {
             $_SESSION['user_admin'] = true;
         }
+        header('Location: dashboard.php');
     } else {
         echo "<script>
                 window.addEventListener('load', ()=>{
