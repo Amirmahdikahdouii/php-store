@@ -3,14 +3,14 @@
 <?php
 include_once '../settings/dbconfig.php';
 session_start();
-$user_id = 1;
-$sql = "SELECT * FROM cart WHERE user_id='$user_id'";
+$user_id=1;
+$sql="SELECT *FROM cart WHERE user_id='$user_id'";
+$result=mysqli_query($db_connection,$sql);
+$result=mysqli_fetch_assoc($result);
+$cart_id=$result['id'];
+$sql="SELECT * FROM cart_prodect WHERE cart_id='$cart_id'";
 $result = mysqli_query($db_connection, $sql);
-$result = mysqli_fetch_assoc($result);
-$cart_id = $result['id'];
-$sql = "SELECT * FROM cart_product WHERE cart_id='$cart_id'";
-$result = mysqli_query($db_connection, $sql);
-$result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+$result=mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <head>
     <meta charset="UTF-8">
@@ -87,15 +87,11 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
     </aside>
     <section class="cart-items-container">
                  <?php
+                 var_dump($result);
                  for($i=0;$i<=sizeof($result)-1; $i++){
                  ?>
         <div class="cart-list-item">
-                 <?php
-                 $product_id = $result[$i]['product_id'];
-                 $sql = "SELECT * FROM product WHERE id='$product_id'";
-                 $product = mysqli_query($db_connection, $sql);
-                 $product = mysqli_fetch_assoc($product);
-                 ?>               
+                
             <div class="cart-list-item-image-count-container">
                 <div class="cart-list-item-image-container center">
                     <img src="../../media/<?php echo $product['image']; ?>" alt="Coffe" class="cart-list-item-image">
