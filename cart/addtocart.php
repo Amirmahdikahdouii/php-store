@@ -11,7 +11,7 @@ try{
     $product_id = intval($product_id);
     $cart_id=intval($cart_id);
     if( $product_id==0 or $cart_id==0 ){
-        throw new Exception("error");
+        throw new Exception("Error");
     }
 }
 catch(Exception $ex){
