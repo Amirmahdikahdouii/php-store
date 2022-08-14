@@ -7,27 +7,27 @@
 
 @font-face {
     font-family: welcome;
-    src: url('../font/Inspiration-Regular.ttf');
+    src: url('../../font/Inspiration-Regular.ttf');
 }
 
 
 @font-face {
     font-family: header-main-title;
-    src: url('../font/Prompt-Light.ttf');
+    src: url('../../font/Prompt-Light.ttf');
 }
 
 @font-face {
     font-family: header-main-description;
-    src: url('../font/Manrope-Light.ttf');
+    src: url('../../font/Manrope-Light.ttf');
 }
 
 @font-face {
     font-family: our-commitment-title;
-    src: url('../font/LibreFranklin-Light.ttf');
+    src: url('../../font/LibreFranklin-Light.ttf');
 }
 
 body {
-    background-image: url('../img/pattern.jpg');
+    background-image: url('../../img/pattern.jpg');
     background-position: center;
     background-color: #6f4d37;
     background-repeat: no-repeat;
@@ -68,6 +68,7 @@ a {
 }
 
 .menu-item-image-container {
+    position: relative;
     width: 300px;
     height: 300px;
     max-width: 300px;
@@ -78,9 +79,12 @@ a {
 }
 
 .menu-item-image {
+    max-width: 100%;
+    width: auto;
+    height: 100%;
+    max-height: 100%;
     border-radius: 10px;
 }
-
 
 .menu-item-title-container {
     width: 90%;
@@ -199,7 +203,7 @@ a {
     background-color: rgba(5, 131, 210, 1);
 }
 
-@media screen and (max-width:986px) {
+@media screen and (max-width: 986px) {
     .menu-item-image-container {
         width: 250px;
         height: 250px;
@@ -211,7 +215,7 @@ a {
     }
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
     .main-container {
         width: 89%;
         margin: 2% auto;
@@ -231,10 +235,11 @@ a {
     }
 }
 
-@media screen and (max-width:500px) {
-    .menu-item-container{
+@media screen and (max-width: 500px) {
+    .menu-item-container {
         justify-content: flex-start;
     }
+
     .menu-item-image-container {
         width: 80%;
         max-width: 180px;
@@ -243,41 +248,50 @@ a {
         padding: 1%;
         border-radius: 10px;
     }
-    .menu-item-title{
+
+    .menu-item-title {
         font-size: 17px;
     }
-    .menu-item-old-price{
+
+    .menu-item-old-price {
         font-size: 11px;
     }
-    .menu-item-price{
+
+    .menu-item-price {
         font-size: 15px;
     }
-    .menu-item-add-to-cart-button{
+
+    .menu-item-add-to-cart-button {
         width: 60%;
         font-size: 14px;
         margin-bottom: 2%;
     }
-    .menu-item-price-off center{
+
+    .menu-item-price-off center {
         width: 30px;
         height: 30px;
         font-size: 13px;
     }
-    .menu-item-buttons-container{
+
+    .menu-item-buttons-container {
         flex-direction: column;
     }
-    .menu-item-add-remove-buttons{
+
+    .menu-item-add-remove-buttons {
         width: 100%;
         margin: 2% 0 1%;
         justify-content: space-between;
     }
+
     .menu-item-plus-button-count,
     .menu-item-minus-button-count,
-    .menu-item-delete-button-count{
+    .menu-item-delete-button-count {
         width: 20%;
     }
-    .menu-item-plus-button-count>i,
-    .menu-item-minus-button-count>i,
-    .menu-item-delete-button-count>i{
+
+    .menu-item-plus-button-count > i,
+    .menu-item-minus-button-count > i,
+    .menu-item-delete-button-count > i {
         width: 15px;
         height: 15px;
     }

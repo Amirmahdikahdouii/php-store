@@ -16,7 +16,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <?php
     include_once "../components/header-footer-style.php"
     ?>
-    <link rel="stylesheet" href="../static/css/menu.css"/>
+    <link rel="stylesheet" href="../static/css/products/menu.css"/>
 </head>
 
 <body>
@@ -34,7 +34,7 @@ include_once "../components/header.php"
     for ($i = 0; $i < count($result); $i++) {
         ?>
         <div class="menu-item-container">
-            <div class="menu-item-image-container">
+            <div class="center menu-item-image-container">
                 <img src="../media/product-image/<?= $result[$i]["image"] ?>" width="100%" height="100%"
                      class="menu-item-image"/>
             </div>
