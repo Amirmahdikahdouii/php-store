@@ -55,12 +55,17 @@ if (
         }
         // Update Product In User Cart
         $productCartId = $result["id"];
-        // TODO: Minus Count Of Product
+        // Check If productCount is more than stock, Die The Program and show message
+        $sql = "SELECT * FROM `product` WHERE id='$productId'";
+        $result = mysqli_query($db_connection, $sql);
+        $result = mysqli_fetch_assoc($result);
+        if ($productCount > intval($result["count"])) {
+            die("Maximum Count Of Our Stock");
+        }
         $sql = "UPDATE `cart_products` SET count='$productCount' WHERE id='$productCartId'";
         $result = mysqli_query($db_connection, $sql);
     } catch (Exception $ex) {
         // Raise Exception If User Have Not Product In His cart_product And Add New Field With Count 1
-        // TODO: Minus Count Of Product
         $sql = "INSERT INTO `cart_products` (`id`, `product_id`, `cart_id`, `count`) VALUES (NULL, '$productId', '$userCartId', '1')";
         $result = mysqli_query($db_connection, $sql);
     }
