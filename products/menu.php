@@ -26,7 +26,10 @@ include_once "../components/header.php"
 ?>
 
 <section class="main-container">
-
+    <?php
+    // Include The Alert Message Container
+    include_once "../components/alertMessage.php";
+    ?>
     <?php
     for ($i = 0; $i < count($result); $i++) {
         ?>
@@ -68,8 +71,7 @@ include_once "../components/header.php"
                 </div>
             </div>
             <div class="menu-item-buttons-container">
-                <a class="menu-item-add-to-cart-button"
-                   href="../cart/addToCart.php?product_id=<?= $result[$i]["id"] ?>">Add to cart</a>
+                <span class="menu-item-add-to-cart-button" onclick="addToCartButton(<?= $result[$i]["id"] ?>)">Add to cart</span>
             </div>
         </div>
         <?php
@@ -143,7 +145,11 @@ include_once "../components/header.php"
         </div>
     </div>
 </footer>
-<script src="../static/js/header.js"></script>
+<?php
+// Include The Main Scripts Files
+include_once "../components/mainScript.php";
+?>
+<script src="../static/js/products/menu.js"></script>
 </body>
 
 </html>

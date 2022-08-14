@@ -69,4 +69,5 @@ if (
         $sql = "INSERT INTO `cart_products` (`id`, `product_id`, `cart_id`, `count`) VALUES (NULL, '$productId', '$userCartId', '1')";
         $result = mysqli_query($db_connection, $sql);
     }
+    die("Product Successfully added to your cart!");
 }
