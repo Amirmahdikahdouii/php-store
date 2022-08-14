@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once "../settings/dbconfig.php";
 // Get Product Id From Query String
 if (
 isset($_GET["product_id"])
@@ -15,12 +16,27 @@ try {
 } catch (Exception $ex) {
     die($ex->getMessage());
 }
+
+// Method To check Stock Product Count
+function checkStockCount($userProductCount)
+{
+    global $productId;
+    global $db_connection;
+    $sql = "SELECT * FROM `product` WHERE id='$productId'";
+    $result = mysqli_query($db_connection, $sql);
+    $result = mysqli_fetch_assoc($result);
+    $stockCount = intval($result["count"]);
+    if ($userProductCount > $stockCount) {
+        return True;
+    }
+    return False;
+}
+
 // Check If User Is Authenticated, Add Product To Cart
 if (
     isset($_SESSION["user_login"]) &&
     isset($_SESSION["user_id"])
 ) {
-    require_once "../settings/dbconfig.php";
     $userID = intval($_SESSION["user_id"]);
     // Get User Cart From Database
     try {
@@ -56,10 +72,7 @@ if (
         // Update Product In User Cart
         $productCartId = $result["id"];
         // Check If productCount is more than stock, Die The Program and show message
-        $sql = "SELECT * FROM `product` WHERE id='$productId'";
-        $result = mysqli_query($db_connection, $sql);
-        $result = mysqli_fetch_assoc($result);
-        if ($productCount > intval($result["count"])) {
+        if (checkStockCount($productCount)) {
             die("Maximum Count Of Our Stock");
         }
         $sql = "UPDATE `cart_products` SET count='$productCount' WHERE id='$productCartId'";
@@ -71,3 +84,17 @@ if (
     }
     die("Product Successfully added to your cart!");
 }
+// Add to Session storage to added later into user cart
+if (isset($_SESSION["userCart"][$productId])) {
+    $productCount = intval($_SESSION["userCart"][$productId]);
+    if (checkStockCount($productCount)) {
+        die("Maximum Count Of Our Stock");
+    }
+    $productCount++;
+    $_SESSION["userCart"][$productId] = $productCount;
+} else {
+    $_SESSION["userCart"] = [
+        $productId => 1,
+    ];
+}
+die("Product Added To your Cart, Login To see Your Cart");
