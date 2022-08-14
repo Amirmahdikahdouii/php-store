@@ -87,6 +87,10 @@ if (
 // Add to Session storage to added later into user cart
 if (isset($_SESSION["userCart"][$productId])) {
     $productCount = intval($_SESSION["userCart"][$productId]);
+    // Maximum Count of buying product handle
+    if ($productCount > 10) {
+        die("Maximum of Product Count For Buy!");
+    }
     if (checkStockCount($productCount)) {
         die("Maximum Count Of Our Stock");
     }

@@ -68,7 +68,6 @@ a {
 }
 
 .menu-item-image-container {
-    position: relative;
     width: 300px;
     height: 300px;
     max-width: 300px;
@@ -81,7 +80,7 @@ a {
 .menu-item-image {
     max-width: 100%;
     width: auto;
-    height: 100%;
+    height: auto;
     max-height: 100%;
     border-radius: 10px;
 }

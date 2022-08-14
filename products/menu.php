@@ -1,6 +1,6 @@
 <?php
 include_once "../settings/dbconfig.php";
-$sql = "SELECT * FROM `product`";
+$sql = "SELECT * FROM `product` WHERE is_active='1'";
 $result = mysqli_query($db_connection, $sql);
 $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
