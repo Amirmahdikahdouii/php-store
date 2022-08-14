@@ -6,111 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./static/css/header.css">
     <link rel="stylesheet" href="./static/css/style.css">
     <link rel="stylesheet" href="./static/css/footer.css">
 </head>
 
 <body>
-
-<header class="header">
-    <div class="header-background"></div>
-    <div class="header-menu-background">
-        <nav class="header-nav-container">
-            <div class="logo">
-                <span>Coffee Shop</span>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                     class="bi bi-list" id="header-nav-menu-icon" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
-                    </path>
-                </svg>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
-                     class="bi bi-x-lg" viewBox="0 0 16 16" id="header-nav-menu-close-icon">
-                    <path fill-rule="evenodd"
-                          d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                    <path fill-rule="evenodd"
-                          d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-                </svg>
-            </div>
-
-            <ul class="header-menu" id="header-menu-id">
-                <li class="header-menu-item"><a href="#">Home</a></li>
-                <li class="header-menu-item"><a href="./pages/menu.html">Menu</a></li>
-                <li class="header-menu-item"><a href="./pages/blog.html">Blog</a></li>
-                <li class="header-menu-item"><a href="./Accounts/login.php">Account</a></li>
-                <li class="header-menu-item"><a href="./pages/about-us.html">About</a></li>
-                <li class="header-menu-item"><a href="./pages/contact-us.html">Contact</a></li>
-                <li class="header-menu-item">
-                    <a href="./pages/cart.html">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                             class="bi bi-cart" viewBox="0 0 16 16">
-                            <path
-                                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-
-        </nav>
-    </div>
-
-    <div class="header-main-container">
-        <h1 class="welcome">Welcome</h1>
-        <h1 class="header-main-title">THE BEST COFFE TASTE AND EXPERIENCE!</h1>
-        <p class="header-main-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo eius
-            accusantium quibusdam unde cupiditate </p>
-        <div class="header-main-buttons-container">
-            <button class="header-main-button">Order Now</button>
-            <button class="header-main-button">View Menu</button>
-        </div>
-    </div>
-
-    <div class="header-coffeshop-info-container">
-
-        <div class="header-coffeshop-info">
-            <div class="header-coffeshop-info-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                </svg>
-                <span>+98 903-378 2632</span>
-            </div>
-            <p class="header-coffeshop-info-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-        </div>
-        <div class="header-coffeshop-info">
-            <div class="header-coffeshop-info-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                    <path
-                            d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                </svg>
-                <span>Tehran - Jordan Street</span>
-            </div>
-            <p class="header-coffeshop-info-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            </p>
-
-        </div>
-
-        <div class="header-coffeshop-info">
-            <div class="header-coffeshop-info-title">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-clock-fill" viewBox="0 0 16 16">
-                    <path
-                            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                </svg>
-                <span>Open Everyday</span>
-            </div>
-            <p class="header-coffeshop-info-description">8:00 AM-10:00 PM</p>
-
-        </div>
-
-    </div>
-
-</header>
-
+<?php
+include_once "./components/header.php";
+?>
 <section class="section-our-story">
     <div class="our-story-image">
         <img src="./static/img/coffe-shop.jpg" width="100%" alt="CoffeShop"/>
