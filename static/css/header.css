@@ -1,6 +1,5 @@
 .header {
     width: 100%;
-    padding: 2% 0;
     display: flex;
     flex-flow: column wrap;
     justify-content: flex-start;
@@ -69,6 +68,12 @@
 
 .header-menu-item>a:hover {
     color: white;
+}
+
+#header-nav-menu-icon,
+#header-nav-menu-close-icon{
+    font-size: 25px;
+    cursor: pointer;
 }
 
 @media screen and (max-width:1200px) {

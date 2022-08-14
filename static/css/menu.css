@@ -275,9 +275,9 @@ a {
     .menu-item-delete-button-count{
         width: 20%;
     }
-    .menu-item-plus-button-count>svg,
-    .menu-item-minus-button-count>svg,
-    .menu-item-delete-button-count>svg{
+    .menu-item-plus-button-count>i,
+    .menu-item-minus-button-count>i,
+    .menu-item-delete-button-count>i{
         width: 15px;
         height: 15px;
     }
