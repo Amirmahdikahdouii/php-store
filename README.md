@@ -1,4 +1,4 @@
-# php-store_project
+# php-store-project
 PHP store back-End and Front-End project.
 <br>
 <h3>contributors:</h3>
