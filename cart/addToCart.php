@@ -5,14 +5,27 @@ require_once "../settings/dbconfig.php";
 if (
 isset($_GET["product_id"])
 ) {
+
     $productId = intval($_GET["product_id"]);
 } else {
     $productId = 0;
 }
+
+// Method to check if productId is not exist, raise Error
+function checkProductExists($productId)
+{
+    global $db_connection;
+    $sql = "SELECT * FROM `product` WHERE id='$productId'";
+    $result = mysqli_query($db_connection, $sql);
+    $result = mysqli_fetch_assoc($result);
+    if ($result === null) throw new Exception("Product Id Is not Valid!");
+}
+
 try {
-    if ($productId === 0) {
-        throw new Exception("Product Id Is not Valid");
+    if ($productId <= 0) {
+        throw new Exception("Product Id Is not Valid!");
     }
+    checkProductExists($productId);
 } catch (Exception $ex) {
     die($ex->getMessage());
 }
