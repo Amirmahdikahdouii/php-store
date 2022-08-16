@@ -39,13 +39,13 @@ include_once "../components/header.php"
                      class="menu-item-image"/>
             </div>
             <div class="menu-item-title-container">
-                <a href="./products.html" class="menu-item-title"><?= $result[$i]["name"] ?></a>
+                <a href="./product.php?id=<?= $result[$i]["id"] ?>" class="menu-item-title"><?= $result[$i]["name"] ?></a>
                 <div class="menu-item-price-container">
                     <div class="menu-item-prices">
                         <?php
                         if ($result[$i]["have_price_with_off"]) {
                             $productId = $result[$i]["id"];
-                            $offPriceSql = "SELECT * FROM product_with_off_prices WHERE product_id=$productId";
+                            $offPriceSql = "SELECT * FROM product_with_off_prices WHERE product_id='$productId'";
                             $offPriceResult = mysqli_query($db_connection, $offPriceSql);
                             $offPriceResult = mysqli_fetch_assoc($offPriceResult);
                             ?>

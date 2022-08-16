@@ -1,25 +1,27 @@
 // Cup Sizing Select Section
 
 let cupes = document.querySelectorAll('.cup-size');
-let detailWeightSize = document.getElementById('detail-weight-size'), detailMilkSize = document.getElementById('detail-milk-size');
+let detailWeightSize = document.getElementById('detail-weight-size'),
+    detailMilkSize = document.getElementById('detail-milk-size');
 
-cupSelectColorize = number => {
+cupSelectColorize = (number, priceNumber) => {
     let index;
     let price = document.querySelector('.price')
     for (index = 0; index < cupes.length; index++) {
         cupes[index].className = 'cup-size center';
     }
+    price.innerHTML = '<i class="bi bi-currency-dollar" style="font-size: inherit; color: #fff;"></i> ';
     if (number == 0) {
-        price.textContent = '2.00 $';
+        price.innerHTML += parseFloat(priceNumber).toFixed(2);
         detailWeightSize.innerText = '150 cc';
         detailMilkSize.innerText = '40 cc'
 
     } else if (number == 1) {
-        price.textContent = '3.00 $';
+        price.innerHTML += parseFloat(priceNumber + 2).toFixed(2);
         detailWeightSize.innerText = '250 cc';
         detailMilkSize.innerText = '60 cc'
     } else {
-        price.textContent = '4.00 $';
+        price.innerHTML += parseFloat(priceNumber + 3).toFixed(2);
         detailWeightSize.innerText = '350 cc';
         detailMilkSize.innerText = '80 cc';
     }
@@ -69,54 +71,32 @@ let moreProductPictures = document.getElementsByClassName('more-picture-item-ima
     })
 })
 
-// Related Products Change Buttons
-
-let changeRelatedProductsForward = document.getElementById('change-related-products-forward'),
-    changeRelatedProductsBackward = document.getElementById('change-related-products-backward'),
-    relatedProductsItems = document.getElementsByClassName('related-products-item'),
-    firstShowProductsIndex = 0,
-    lastShowProductsIndex;
-// screenWidth 
-let screenWidth;
-
-function getScreenWidth() {
-    screenWidth = screen.width;
-    if (screen.width > 950) {
-        lastShowProductsIndex = 4;
-    } else if (screen.width <= 950) {
-        lastShowProductsIndex = 3;
+// Related Items carousel
+let carouselProductCards = [...document.getElementsByClassName('carousel-product-card')];
+let carouselNextButton = document.getElementById("change-carousel-items-button-next");
+let carouselPreviousButton = document.getElementById("change-carousel-items-button-previous");
+let firstActiveItemIndex = 0;
+let lastActiveItemIndex = 4;
+carouselNextButton.addEventListener('click', (e) => {
+    if (lastActiveItemIndex === carouselProductCards.length - 1) {
+        e.preventDefault();
+        return null;
     }
-}
+    lastActiveItemIndex++;
+    carouselProductCards[lastActiveItemIndex].className = 'carousel-product-card carousel-product-card-active';
+    carouselProductCards[firstActiveItemIndex].className = 'carousel-product-card';
+    firstActiveItemIndex++;
+})
 
-
-changeRelatedProductsForward.addEventListener('click', (e) => {
-    lastShowProductsIndex += 1;
-    if (lastShowProductsIndex >= relatedProductsItems.length) {
-        lastShowProductsIndex = relatedProductsItems.length - 1
-        return
+carouselPreviousButton.addEventListener('click', (e) => {
+    if (firstActiveItemIndex === 0) {
+        e.preventDefault();
+        return null;
     }
-    relatedProductsItems[lastShowProductsIndex].style.display = 'flex';
-    relatedProductsItems[firstShowProductsIndex].style.display = 'none';
-    firstShowProductsIndex += 1;
-});
-
-changeRelatedProductsForward.addEventListener('mouseenter', () => {
-    getScreenWidth()
-});
-
-changeRelatedProductsBackward.addEventListener('mouseenter', () => {
-    getScreenWidth()
-});
-
-changeRelatedProductsBackward.addEventListener('click', () => {
-    firstShowProductsIndex -= 1;
-    if (firstShowProductsIndex < 0) {
-        firstShowProductsIndex = 0
-        return
-    }
-    relatedProductsItems[firstShowProductsIndex].style.display = 'flex'
-    relatedProductsItems[lastShowProductsIndex].style.display = 'none';
-    lastShowProductsIndex -= 1;
+    carouselProductCards[lastActiveItemIndex].className = 'carousel-product-card';
+    lastActiveItemIndex--;
+    firstActiveItemIndex--;
+    carouselProductCards[firstActiveItemIndex].className = 'carousel-product-card carousel-product-card-active';
 })
 
 // product-more-detail-table-read-more-button handler
@@ -202,3 +182,26 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
 }
 
 newCommentStarFillHandler(newCommentStars, newCommentStarsFill)
+
+// Add To cart With Ajax
+const addRoCartButtonHandler = () => {
+    let productID = parseInt(addToCartButton.getAttribute("productId"));
+    let xhttpRequest = new XMLHttpRequest();
+    xhttpRequest.onload = () => {
+        if (xhttpRequest.status !== 200) {
+            openAlertContainer("Error!", "SomeThing Bad Happend, Please Try Again!", "Try Again", addToCartButton(productId));
+            return null;
+        }
+        openAlertContainer("Message: ", xhttpRequest.responseText);
+    }
+    xhttpRequest.open("GET", `../cart/addToCart.php?product_id=${productID}`);
+    xhttpRequest.send();
+}
+// Add to cart for Main Product
+let addToCartButton = document.querySelector(".add-to-cart-button");
+addToCartButton.addEventListener("click", addRoCartButtonHandler);
+// Add to cart for related products
+let relatedProductsAddToCartButton = document.querySelectorAll(".product-cart-button");
+relatedProductsAddToCartButton.forEach(element => {
+    element.addEventListener("click", addRoCartButtonHandler);
+})
