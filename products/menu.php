@@ -75,7 +75,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </div>
             </div>
             <div class="menu-item-buttons-container">
-                <a class="menu-item-add-to-cart-button" href="./cart.html">Add to cart</a>
+                <a class="menu-item-add-to-cart-button" href="../cart/addtocart.php?productId=<?= $result[$i]?>">Add to cart</a>
             </div>
         </div>
         <?php
