@@ -158,6 +158,11 @@ a {
     font-family: header-main-description;
 }
 
+.header-coffeshop-info-title > i {
+    font-size: 18px;
+    color: #000;
+}
+
 .header-coffeshop-info-description {
     padding: 1% 0;
     width: 90%;
@@ -1025,6 +1030,7 @@ a {
         width: 250px;
         height: 250px;
     }
+
     .menu-item-image-container {
         width: 250px;
         height: 250px;
@@ -1175,6 +1181,7 @@ a {
     .our-full-menu-item:nth-child(9) {
         display: none;
     }
+
     .main-container {
         width: 89%;
         margin: 2% auto;
@@ -1243,7 +1250,7 @@ a {
         width: 70%;
     }
 
-    .our-commitment-icon > svg {
+    .our-commitment-icon > i {
         height: 20px;
         width: 20px;
     }
@@ -1284,9 +1291,11 @@ a {
     .our-full-menu-item-title {
         font-size: 12px;
     }
-    .menu-item-container{
+
+    .menu-item-container {
         justify-content: flex-start;
     }
+
     .menu-item-image-container {
         width: 80%;
         max-width: 180px;
@@ -1295,41 +1304,50 @@ a {
         padding: 1%;
         border-radius: 10px;
     }
-    .menu-item-title{
+
+    .menu-item-title {
         font-size: 17px;
     }
-    .menu-item-old-price{
+
+    .menu-item-old-price {
         font-size: 11px;
     }
-    .menu-item-price{
+
+    .menu-item-price {
         font-size: 15px;
     }
-    .menu-item-add-to-cart-button{
+
+    .menu-item-add-to-cart-button {
         width: 60%;
         font-size: 14px;
         margin-bottom: 2%;
     }
-    .menu-item-price-off center{
+
+    .menu-item-price-off center {
         width: 30px;
         height: 30px;
         font-size: 13px;
     }
-    .menu-item-buttons-container{
+
+    .menu-item-buttons-container {
         flex-direction: column;
     }
-    .menu-item-add-remove-buttons{
+
+    .menu-item-add-remove-buttons {
         width: 100%;
         margin: 2% 0 1%;
         justify-content: space-between;
     }
+
     .menu-item-plus-button-count,
     .menu-item-minus-button-count,
-    .menu-item-delete-button-count{
+    .menu-item-delete-button-count {
         width: 20%;
     }
-    .menu-item-plus-button-count>svg,
-    .menu-item-minus-button-count>svg,
-    .menu-item-delete-button-count>svg{
+
+    .menu-item-plus-button-count > i,
+    .menu-item-minus-button-count > i,
+    .menu-item-delete-button-count > i {
         width: 15px;
         height: 15px;
     }

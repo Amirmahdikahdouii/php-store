@@ -21,9 +21,11 @@ $userBirthday = $result['birthday'];
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DashBoard</title>
+    <?php
+    // Include Style Of header and Footer and main Styles
+    include_once "../components/header-footer-style.php";
+    ?>
     <link href="../static/css/dashboard.css" rel="stylesheet"/>
-    <link href="../static/css/header.css" rel="stylesheet"/>
-    <link href="../static/css/footer.css" rel="stylesheet"/>
 </head>
 
 <body class="center">
@@ -1018,9 +1020,11 @@ $userBirthday = $result['birthday'];
     </div>
 </footer>
 
-
+<?php
+// Include Main Scripts
+include_once "../components/mainScript.php";
+?>
 <script src="../static/js/dashboard.js"></script>
-<script src="../static/js/header.js"></script>
 
 </body>
 

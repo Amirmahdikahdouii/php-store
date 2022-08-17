@@ -6,51 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Not Found</title>
-    <link rel="stylesheet" href="../static/css/header.css">
-    <link rel="stylesheet" href="../static/css/footer.css">
-    <link rel="stylesheet" href="../static/css/404.css" />
+    <?php
+    include_once "../components/header-footer-style.php";
+    include_once "../components/mainScript.php";
+    ?>
+    <link rel="stylesheet" href="../static/css/404.css"/>
 </head>
 
 <body>
-<header class="header">
-    <nav class="header-nav-container">
-        <div class="logo">
-            <span>Coffe Shop</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-list"
-                 id="header-nav-menu-icon" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
-                </path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-x-lg"
-                 viewBox="0 0 16 16" id="header-nav-menu-close-icon">
-                <path fill-rule="evenodd"
-                      d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z" />
-                <path fill-rule="evenodd"
-                      d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z" />
-            </svg>
-        </div>
-
-        <ul class="header-menu" id="header-menu-id">
-            <li class="header-menu-item"><a href="../index.php">Home</a></li>
-            <li class="header-menu-item"><a href="./menu.html">Menu</a></li>
-            <li class="header-menu-item"><a href="./blog.html">Blog</a></li>
-            <li class="header-menu-item"><a href="../Accounts/login.php">Account</a></li>
-            <li class="header-menu-item"><a href="./about-us.html">About</a></li>
-            <li class="header-menu-item"><a href="./contact-us.html">Contact</a></li>
-            <li class="header-menu-item">
-                <a href="./cart.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-cart" viewBox="0 0 16 16">
-                        <path
-                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                    </svg>
-                </a>
-            </li>
-        </ul>
-
-    </nav>
-</header>
+<?php
+include_once "../components/header.php";
+?>
 <section class="main-container">
     <h1 class="status-code-title">404</h1>
     <p class="error-message-text">Your Page That you're looking for Not Found!</p>
@@ -85,13 +51,15 @@
         <div class="footer-item-address-info">
             <a class="footer-item-address-info-name" href="#">coffe-iran.com</a>
         </div>
-        <p class="copyright">Copyright ©2022 All rights reserved | This template is made with <svg
-                xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-heart"
-                viewBox="0 0 16 16">
-            <path
-                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
-            </path>
-        </svg> by
+        <p class="copyright">Copyright ©2022 All rights reserved | This template is made with
+            <svg
+                    xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-heart"
+                    viewBox="0 0 16 16">
+                <path
+                        d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z">
+                </path>
+            </svg>
+            by
             <a href="#">Amir Mahdi Kahdouii</a>
         </p>
     </div>
@@ -122,8 +90,6 @@
         </div>
     </div>
 </footer>
-
-<script src="../static/js/header.js"></script>
 </body>
 
 </html>
