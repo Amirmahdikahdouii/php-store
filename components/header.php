@@ -9,12 +9,12 @@
             </div>
             <!-- Header Menu List -->
             <ul class="header-menu" id="header-menu-id">
-                <li class="header-menu-item"><a href="/php-store/index.php">Home</a></li>
-                <li class="header-menu-item"><a href="/php-store/products/menu.php">Menu</a></li>
-                <li class="header-menu-item"><a href="pages/blog.html">Blog</a></li>
-                <li class="header-menu-item"><a href="/php-store/Accounts/login.php">Account</a></li>
-                <li class="header-menu-item"><a href="pages/about-us.html">About</a></li>
-                <li class="header-menu-item"><a href="pages/contact-us.html">Contact</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/index.php">Home</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/products/menu.php">Menu</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/pages/blog.html">Blog</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/Accounts/login.php">Account</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/pages/about-us.html">About</a></li>
+                <li class="header-menu-item"><a href="/php-store-project/pages/contact-us.html">Contact</a></li>
                 <li class="header-menu-item">
                     <a href="pages/cart.html">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"

@@ -178,7 +178,11 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
             }
         }
     })
+}
 
+function setCommentMarkRate(markNumber) {
+    let markRateInput = document.getElementById("comment-rate-mark");
+    markRateInput.value = markNumber;
 }
 
 newCommentStarFillHandler(newCommentStars, newCommentStarsFill)
@@ -205,3 +209,54 @@ let relatedProductsAddToCartButton = document.querySelectorAll(".product-cart-bu
 relatedProductsAddToCartButton.forEach(element => {
     element.addEventListener("click", addRoCartButtonHandler);
 })
+
+// Add New Comment Handler
+let sendCommentButton = document.getElementById("new-comment-button");
+const sendCommentButtonHandler = () => {
+    // TODO: we should get productID more secure than get it from hidden input
+    let productID = document.getElementById("product_id");
+
+    // Get All HTML Nodes to have their values
+    let commentRateInput = document.getElementById("comment-rate-mark");
+    let titleInput = document.getElementById("comment-title");
+    let messageInput = document.getElementById("new-comment-message");
+
+    // Make New variable to have input values
+    let commentRateMark = commentRateInput.value;
+    let titleValue = titleInput.value;
+    let messageValue = messageInput.value;
+
+    // Check Length to have a simple and Normal comment
+    if (titleValue.length < 4 || messageValue.length < 10) {
+        openAlertContainer("Warning!", "Please Fill Out the Input!");
+        return null;
+    }
+
+    // Make a JSON object to send data to module
+    let formData = {
+        "productID": productID.value,
+        "rateMark": commentRateMark,
+        "title": titleValue,
+        "message": messageValue
+    }
+    formData = JSON.stringify(formData);
+
+    // Create a new XMLHttpRequest for sending Data
+    let xHttpRequest = new XMLHttpRequest();
+    xHttpRequest.onload = () => {
+        let responseJson = xHttpRequest.responseText;
+        console.log(responseJson);
+        responseJson = JSON.parse(responseJson);
+        if (parseInt(responseJson["statusCode"])) {
+            openAlertContainer(responseJson["title"], responseJson["responseMessage"]);
+        } else {
+            openAlertContainer(responseJson["title"], responseJson["responseMessage"], "Try Again", sendCommentButtonHandler);
+        }
+    }
+    xHttpRequest.open("POST", "./addCommentToDB.php");
+    // To Send Data like a html Form
+    // TODO: Send data in different way!
+    xHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xHttpRequest.send(`formData=${formData}`);
+}
+sendCommentButton.addEventListener('click', sendCommentButtonHandler);
