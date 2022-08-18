@@ -163,7 +163,7 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
             i = newCommentStars.indexOf(starIcon);
             for (let starFillIndex = 0; starFillIndex <= i; starFillIndex++) {
                 newCommentStarsFill[starFillIndex].style.display = 'inline-block';
-                newCommentStarMarkSpan.innerText = `${starFillIndex + 1}.00`
+                newCommentStarMarkSpan.innerText = `${starFillIndex + 1}.0`
             }
         }
     });
@@ -171,7 +171,7 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
         starFillIcon.onclick = () => {
             i = newCommentStarsFill.indexOf(starFillIcon);
             i++
-            newCommentStarMarkSpan.innerText = `${i}.00`;
+            newCommentStarMarkSpan.innerText = `${i}.0`;
             for (i; i < newCommentStarsFill.length; i++) {
                 newCommentStarsFill[i].style.display = 'none';
                 newCommentStars[i].style.display = 'inline-block';

@@ -9,10 +9,10 @@
             </div>
             <!-- Header Menu List -->
             <ul class="header-menu" id="header-menu-id">
-                <li class="header-menu-item"><a href="index.php">Home</a></li>
-                <li class="header-menu-item"><a href="products/menu.php">Menu</a></li>
+                <li class="header-menu-item"><a href="/php-store/index.php">Home</a></li>
+                <li class="header-menu-item"><a href="/php-store/products/menu.php">Menu</a></li>
                 <li class="header-menu-item"><a href="pages/blog.html">Blog</a></li>
-                <li class="header-menu-item"><a href="Accounts/login.php">Account</a></li>
+                <li class="header-menu-item"><a href="/php-store/Accounts/login.php">Account</a></li>
                 <li class="header-menu-item"><a href="pages/about-us.html">About</a></li>
                 <li class="header-menu-item"><a href="pages/contact-us.html">Contact</a></li>
                 <li class="header-menu-item">

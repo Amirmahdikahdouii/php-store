@@ -51,7 +51,7 @@ include_once "../components/header.php"
                             ?>
                             <span class="menu-item-old-price">
                                 <i class="bi bi-currency-dollar"></i>
-                                <?= number_format($result[$i]["price"], 2, ".") ?>
+                                <?= number_format($result[$i]["price"], 2) ?>
                             </span>
                             <span class="menu-item-price">
                             <i class="bi bi-currency-dollar"></i>

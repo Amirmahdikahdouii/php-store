@@ -857,11 +857,11 @@ Related Product Section Style
     align-items: flex-start;
 }
 
-.rate-the-product-stars-container > svg {
+.rate-the-product-stars-container > i {
     cursor: pointer;
 }
 
-.rate-the-product-stars-container > svg.bi-star-fill {
+.rate-the-product-stars-container > i.bi-star-fill {
     display: none;
     color: gold;
 }
@@ -993,17 +993,17 @@ Related Product Section Style
         height: 50px;
     }
 
-    .cup-size:nth-child(1) > svg {
+    .cup-size:nth-child(1) > i {
         width: 15px;
         height: 15px;
     }
 
-    .cup-size:nth-child(2) > svg {
+    .cup-size:nth-child(2) > i {
         width: 25px;
         height: 25px;
     }
 
-    .cup-size:nth-child(3) > svg {
+    .cup-size:nth-child(3) > i {
         width: 35px;
         height: 35px;
     }
@@ -1323,17 +1323,17 @@ Related Product Section Style
         width: 90%;
     }
 
-    .cup-size:nth-child(1) > svg {
+    .cup-size:nth-child(1) > i {
         width: 14px;
         height: 14px;
     }
 
-    .cup-size:nth-child(2) > svg {
+    .cup-size:nth-child(2) > i {
         width: 18px;
         height: 18px;
     }
 
-    .cup-size:nth-child(3) > svg {
+    .cup-size:nth-child(3) > i {
         width: 25px;
         height: 25px;
     }
@@ -1401,7 +1401,7 @@ Related Product Section Style
         font-size: 13px;
     }
 
-    .user-rate-stars > svg {
+    .user-rate-stars > i {
         width: 13px;
         height: 13px;
     }
@@ -1410,7 +1410,7 @@ Related Product Section Style
         font-size: 13px;
     }
 
-    .comment-like-dislike-container > svg {
+    .comment-like-dislike-container > i {
         width: 13px;
         height: 13px;
     }
