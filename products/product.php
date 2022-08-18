@@ -26,7 +26,7 @@ $Product = checkProductExists($productID);
 
 // Update View Counter Of Product Field
 // TODO: Update ViewCount After every refresh!
-$viewCount = intval($Product["view"]);
+$viewCount = intval($Product["viewCount"]);
 $viewCount++;
 $sql = "UPDATE `product` SET viewCount='$viewCount' WHERE id='$productID'";
 $updateViewCount = mysqli_query($db_connection, $sql);
@@ -351,11 +351,11 @@ include_once "../components/alertMessage.php";
                 <div class="form-rate-the-product-stars-container">
                     <span id="rate-the-product-star-mark">1.0</span>
                     <div class="rate-the-product-stars-container">
-                        <i class="bi bi-star-fill new-comments-star-fill"></i>
-                        <i class="bi bi-star-fill new-comments-star-fill"></i>
-                        <i class="bi bi-star-fill new-comments-star-fill"></i>
-                        <i class="bi bi-star-fill new-comments-star-fill"></i>
-                        <i class="bi bi-star-fill new-comments-star-fill"></i>
+                        <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(1)"></i>
+                        <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(2)"></i>
+                        <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(3)"></i>
+                        <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(4)"></i>
+                        <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(5)"></i>
                         <i class="bi bi-star new-comments-star"></i>
                         <i class="bi bi-star new-comments-star"></i>
                         <i class="bi bi-star new-comments-star"></i>
@@ -363,9 +363,10 @@ include_once "../components/alertMessage.php";
                         <i class="bi bi-star new-comments-star"></i>
                     </div>
                 </div>
+                <input type="hidden" id="comment-rate-mark" value="0" />
+                <input type="hidden" id="product_id" value="<?= $productID ?>" />
                 <input type="text" id="comment-title" name="comment-title" placeholder="Title" required>
-                <input type="text" id="name" name="name" placeholder="Name" required>
-                <textarea class="new-comment-text-area" id="new-comment" name="new-comment"
+                <textarea class="new-comment-text-area" id="new-comment-message" name="new-comment"
                           placeholder="MESSAGE ..."></textarea>
                 <input type="button" value="Send" id="new-comment-button">
             </form>
