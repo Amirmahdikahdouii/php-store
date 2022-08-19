@@ -3,7 +3,7 @@ session_start();
 require_once "../settings/dbconfig.php";
 // Get Product Id From Query String
 if (
-isset($_GET["product_id"])
+    isset($_GET["product_id"])
 ) {
 
     $productId = intval($_GET["product_id"]);
@@ -110,8 +110,12 @@ if (isset($_SESSION["userCart"][$productId])) {
     $productCount++;
     $_SESSION["userCart"][$productId] = $productCount;
 } else {
-    $_SESSION["userCart"] = [
-        $productId => 1,
-    ];
+    if (!isset($_SESSION["userCart"])) {
+        $_SESSION["userCart"] = [
+            $productId => 1
+        ];
+    } else {
+        array_push($_SESSION["userCart"], [$productId => 1]);
+    }
 }
 die("Product Added To your Cart, Login To see Your Cart");
