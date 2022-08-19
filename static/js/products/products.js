@@ -245,10 +245,24 @@ const sendCommentButtonHandler = () => {
     let xHttpRequest = new XMLHttpRequest();
     xHttpRequest.onload = () => {
         let responseJson = xHttpRequest.responseText;
-        console.log(responseJson);
         responseJson = JSON.parse(responseJson);
         if (parseInt(responseJson["statusCode"])) {
             openAlertContainer(responseJson["title"], responseJson["responseMessage"]);
+            setTimeout(() => {
+                let commentContainer = document.querySelector(".past-comment-item");
+                let commentTitle = commentContainer.querySelector(".past-comment-item-title");
+                let commentMessage = commentContainer.querySelector(".comment-item-message");
+                let commentUserName = commentContainer.querySelector(".comment-item-user");
+                let userRateMark = commentContainer.querySelector(".user-rate-mark");
+                formData = JSON.parse(formData);
+                commentTitle.textContent = formData.title;
+                commentMessage.textContent = formData.message;
+                commentUserName.textContent = "";
+                userRateMark.textContent = formData.rateMark;
+                let pastCommentContainer = document.querySelector(".past-comments-container");
+                pastCommentContainer.appendChild(commentContainer);
+                // TODO: Star Fill Should be active
+            }, 3000);
         } else {
             openAlertContainer(responseJson["title"], responseJson["responseMessage"], "Try Again", sendCommentButtonHandler);
         }

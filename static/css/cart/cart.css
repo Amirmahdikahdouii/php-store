@@ -7,23 +7,23 @@
 
 @font-face {
     font-family: welcome;
-    src: url('../font/Inspiration-Regular.ttf');
+    src: url('../../font/Inspiration-Regular.ttf');
 }
 
 
 @font-face {
     font-family: header-main-title;
-    src: url('../font/Prompt-Light.ttf');
+    src: url('../../font/Prompt-Light.ttf');
 }
 
 @font-face {
     font-family: header-main-description;
-    src: url('../font/Manrope-Light.ttf');
+    src: url('../../font/Manrope-Light.ttf');
 }
 
 @font-face {
     font-family: our-commitment-title;
-    src: url('../font/LibreFranklin-Light.ttf');
+    src: url('../../font/LibreFranklin-Light.ttf');
 }
 
 .center {
@@ -33,7 +33,7 @@
 }
 
 body {
-    background-image: url('../img/pattern.jpg');
+    background-image: url('../../img/pattern.jpg');
     background-position: center;
     background-color: #6f4d37;
     background-repeat: no-repeat;
@@ -239,7 +239,7 @@ body {
     justify-content: flex-start;
 }
 
-.cart-list-item-sell-info > svg {
+.cart-list-item-sell-info>i {
     color: #aaa;
 }
 
@@ -255,6 +255,7 @@ body {
     margin-left: 1%;
     display: flex;
     flex-flow: column nowrap;
+    justify-self: flex-end;
 }
 
 .cart-list-item-price-without-off {
@@ -301,10 +302,10 @@ body {
         font-size: 11px;
     }
 
-    .cart-list-item-sell-info > svg,
-    .cart-list-item-delete-button > svg,
-    .cart-list-item-plus-button > svg,
-    .cart-list-item-mines-button > svg {
+    .cart-list-item-sell-info>i,
+    .cart-list-item-delete-button>i,
+    .cart-list-item-plus-button>i,
+    .cart-list-item-mines-button>i {
         width: 17px;
         height: 17px;
     }
@@ -339,10 +340,10 @@ body {
         font-size: 15px;
     }
 
-    .cart-list-item-sell-info > svg,
-    .cart-list-item-delete-button > svg,
-    .cart-list-item-plus-button > svg,
-    .cart-list-item-mines-button > svg {
+    .cart-list-item-sell-info>i,
+    .cart-list-item-delete-button>i,
+    .cart-list-item-plus-button>i,
+    .cart-list-item-mines-button>i {
         width: 20px;
         height: 20px;
     }
@@ -413,10 +414,10 @@ body {
         font-size: 11px;
     }
 
-    .cart-list-item-sell-info > svg,
-    .cart-list-item-delete-button > svg,
-    .cart-list-item-plus-button > svg,
-    .cart-list-item-mines-button > svg {
+    .cart-list-item-sell-info>i,
+    .cart-list-item-delete-button>i,
+    .cart-list-item-plus-button>i,
+    .cart-list-item-mines-button>i {
         width: 25px;
         height: 25px;
     }
@@ -457,10 +458,10 @@ body {
         font-size: 11px;
     }
 
-    .cart-list-item-sell-info > svg,
-    .cart-list-item-delete-button > svg,
-    .cart-list-item-plus-button > svg,
-    .cart-list-item-mines-button > svg {
+    .cart-list-item-sell-info>i,
+    .cart-list-item-delete-button>i,
+    .cart-list-item-plus-button>i,
+    .cart-list-item-mines-button>i {
         width: 25px;
         height: 25px;
     }
