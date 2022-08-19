@@ -39,7 +39,7 @@ if (isset($_SESSION['user_id'])) {
 
 <head>
     <meta charset="UTF-8">
-    <title>cart</title>
+    <title>Cart</title>
     <?php
     include_once "../components/header-footer-style.php";
     ?>

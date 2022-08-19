@@ -25,50 +25,75 @@
     </div>
     <?php
     if (pathinfo($_SERVER["PHP_SELF"])["basename"] === "index.php") {
-        ?>
-        <div class="header-main-container">
-            <h1 class="welcome">Welcome</h1>
-            <h1 class="header-main-title">THE BEST COFFE TASTE AND EXPERIENCE!</h1>
-            <p class="header-main-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo eius
-                accusantium quibusdam unde cupiditate </p>
-            <div class="header-main-buttons-container">
-                <button class="header-main-button">Order Now</button>
-                <button class="header-main-button">View Menu</button>
-            </div>
-        </div>
-
-        <div class="header-coffeshop-info-container">
-
-            <div class="header-coffeshop-info">
-                <div class="header-coffeshop-info-title">
-                    <i class="bi bi-telephone-fill"></i>
-                    <span>+98 903-378 2632</span>
-                </div>
-                <p class="header-coffeshop-info-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+        include_once "./settings/dbconfig.php";
+        $sql = "SELECT * FROM `index_header_content_container` WHERE is_active='1'";
+        $result = mysqli_query($db_connection, $sql);
+        $result = mysqli_fetch_assoc($result);
+        if ($result !== null) {
+    ?>
+            <div class="header-main-container">
+                <h1 class="welcome">
+                    <?= $result['welcome_title'] ?>
+                </h1>
+                <h1 class="header-main-title">
+                    <?= $result['title'] ?>
+                </h1>
+                <p class="header-main-description">
+                    <?= $result['message'] ?>
                 </p>
-            </div>
-            <div class="header-coffeshop-info">
-                <div class="header-coffeshop-info-title">
-                    <i class="bi bi-geo-alt-fill"></i>
-                    <span>Tehran - Jordan Street</span>
+                <div class="header-main-buttons-container">
+                    <a class="header-main-button" href="<?= $result['leftButtonLink'] ?>" target="_blank">
+                        <?= $result['leftButtonText'] ?>
+                    </a>
+                    <a class="header-main-button" href="<?= $result['rightButtonLink'] ?>" target="_blank">
+                        <?= $result['rightButtonText'] ?>
+                    </a>
                 </div>
-                <p class="header-coffeshop-info-description">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                </p>
-
             </div>
 
-            <div class="header-coffeshop-info">
-                <div class="header-coffeshop-info-title">
-                    <i class="bi bi-clock-fill"></i>
-                    <span>Open Everyday</span>
+            <div class="header-coffeshop-info-container">
+                <?php
+                $sql = "SELECT * FROM `coffee_shop_info` LIMIT 1";
+                $result = mysqli_query($db_connection, $sql);
+                $result = mysqli_fetch_assoc($result);
+                ?>
+                <div class="header-coffeshop-info">
+                    <div class="header-coffeshop-info-title">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span>
+                            <?= $result['phone_number'] ?>
+                        </span>
+                    </div>
+                    <!-- fillOut This tag with any message if you want! -->
+                    <p class="header-coffeshop-info-description"></p>
                 </div>
-                <p class="header-coffeshop-info-description">8:00 AM-10:00 PM</p>
+                <div class="header-coffeshop-info">
+                    <div class="header-coffeshop-info-title">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        <span>
+                            <?= $result['address'] ?>
+                        </span>
+                    </div>
+                    <!-- fillOut This tag with any message if you want! -->
+                    <p class="header-coffeshop-info-description"></p>
+                </div>
+
+                <div class="header-coffeshop-info">
+                    <div class="header-coffeshop-info-title">
+                        <i class="bi bi-clock-fill"></i>
+                        <span>
+                            <?= $result['work_day'] ?>
+                        </span>
+                    </div>
+                    <p class="header-coffeshop-info-description">
+                        <?= $result['work_time'] ?>
+                    </p>
+
+                </div>
 
             </div>
-
-        </div>
-        <?php
+    <?php
+        }
     }
     ?>
 </header>
-

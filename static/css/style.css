@@ -71,6 +71,7 @@ a {
 }
 
 .welcome {
+    text-transform: capitalize;
     margin: 1% 0;
     width: fit-content;
     color: white;
@@ -80,6 +81,7 @@ a {
 }
 
 .header-main-title {
+    text-transform: uppercase;
     margin: 1% 0;
     padding: 1% 0;
     width: 60%;
@@ -97,6 +99,7 @@ a {
     text-align: center;
     font-size: 20px;
     font-family: header-main-description;
+    text-transform: capitalize;
 }
 
 .header-main-buttons-container {
@@ -115,10 +118,11 @@ a {
     color: white;
     font-weight: bold;
     font-size: 17px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: header-main-title;
     border: 1px solid rgba(255, 255, 255, .8);
     cursor: pointer;
     border-radius: 10px;
+    text-transform: capitalize;
 }
 
 .header-main-button:hover {
