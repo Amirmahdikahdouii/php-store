@@ -29,46 +29,9 @@ $userBirthday = $result['birthday'];
 </head>
 
 <body class="center">
-<header class="header">
-    <nav class="header-nav-container">
-        <div class="logo">
-            <span>Coffee Shop</span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-list"
-                 id="header-nav-menu-icon" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z">
-                </path>
-            </svg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-x-lg"
-                 viewBox="0 0 16 16" id="header-nav-menu-close-icon">
-                <path fill-rule="evenodd"
-                      d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"/>
-                <path fill-rule="evenodd"
-                      d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"/>
-            </svg>
-        </div>
-
-        <ul class="header-menu" id="header-menu-id">
-            <li class="header-menu-item"><a href="../index.php">Home</a></li>
-            <li class="header-menu-item"><a href="#">Menu</a></li>
-            <li class="header-menu-item"><a href="#">Blog</a></li>
-            <li class="header-menu-item"><a href="#">Shop</a></li>
-            <li class="header-menu-item"><a href="./login.php">Account</a></li>
-            <li class="header-menu-item"><a href="">About</a></li>
-            <li class="header-menu-item"><a href="#">Contact</a></li>
-            <li class="header-menu-item">
-                <a href="#">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-cart" viewBox="0 0 16 16">
-                        <path
-                                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                    </svg>
-                </a>
-            </li>
-        </ul>
-
-    </nav>
-</header>
+    <?php
+    include_once "../components/header.php";
+    ?>
 <section class="main-section">
     <div class="sideBar-menu-container" id="SideBar-menu-container">
         <div class="sideBar-menu-user-profile-photo-container">

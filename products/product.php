@@ -83,7 +83,11 @@ include_once "../components/alertMessage.php";
         </span>
         <div class="product-rate-container">
             <i class="bi bi-star-fill"></i>
+<<<<<<< HEAD
+            <span class="product-rate-mark"><?= number_format($Product["rate"], 1) ?></span>
+=======
             <span class="product-rate-mark"><?= number_format($Product["rate"], 1, ".") ?></span>
+>>>>>>> 13fc9f13ff2ba7b9ccdc88437678ff0a4ac99241
             <span class="product-rate-mark"><span><?= $Product["viewCount"] ?></span> View</span>
             <a href="#comment-section" class="product-rate-mark"><span><?= count($Comments) ?></span> comments</a>
         </div>
@@ -111,7 +115,7 @@ include_once "../components/alertMessage.php";
 
             <h2 class="price">
                 <i class="bi bi-currency-dollar" style="font-size: inherit; color: #fff;"></i>
-                <?= number_format($Product["price"], 2, ".") ?>
+                <?= number_format($Product["price"], 2) ?>
             </h2>
 
             <div class="center add-to-cart-button-container">
@@ -205,18 +209,18 @@ include_once "../components/alertMessage.php";
                             ?>
                             <span class="product-cart-price">
                                 <i class="bi bi-currency-dollar"></i>
-                                <?= number_format($newPrice['new_price'], 2, "."); ?>
+                                <?= number_format($newPrice['new_price'], 2); ?>
                         </span>
                             <span class="product-cart-price-before-off">
                                 <i class="bi bi-currency-dollar"></i>
-                                <?= number_format($relatedProduct['price'], 2, ".") ?>
+                                <?= number_format($relatedProduct['price'], 2) ?>
                             </span>
                             <?php
                         } else {
                             ?>
                             <span class="product-cart-price">
                                 <i class="bi bi-currency-dollar"></i>
-                                <?= number_format($relatedProduct['price'], 2, ".") ?>
+                                <?= number_format($relatedProduct['price'], 2) ?>
                             </span>
                             <?php
                         }
@@ -306,7 +310,7 @@ include_once "../components/alertMessage.php";
                     <div class="comment-item-header">
                         <h3 class="past-comment-item-title"><?= $comment['title'] ?></h3>
                         <div class="user-rate-to-product">
-                            <span class="user-rate-mark"><?= number_format(floatval($comment['rateMark']), 1, ".") ?></span>
+                            <span class="user-rate-mark"><?= number_format(floatval($comment['rateMark']), 1) ?></span>
                             <div class="user-rate-stars">
                                 <?php
                                 $rateMarkComment = intval($comment['rateMark']);
@@ -349,13 +353,14 @@ include_once "../components/alertMessage.php";
             <h1 class="new-comments-header">New Comment</h1>
             <form class="new-comment-form">
                 <div class="form-rate-the-product-stars-container">
-                    <span id="rate-the-product-star-mark">1.0</span>
+                    <span id="rate-the-product-star-mark">0.0</span>
                     <div class="rate-the-product-stars-container">
                         <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(1)"></i>
                         <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(2)"></i>
                         <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(3)"></i>
                         <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(4)"></i>
                         <i class="bi bi-star-fill new-comments-star-fill" onclick="setCommentMarkRate(5)"></i>
+
                         <i class="bi bi-star new-comments-star"></i>
                         <i class="bi bi-star new-comments-star"></i>
                         <i class="bi bi-star new-comments-star"></i>
