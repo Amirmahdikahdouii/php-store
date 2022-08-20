@@ -1,4 +1,6 @@
 <?php
+// TODO: Pagination and select by category should be add
+session_start();
 include_once "../settings/dbconfig.php";
 $sql = "SELECT * FROM `product` WHERE is_active='1'";
 $result = mysqli_query($db_connection, $sql);
@@ -71,12 +73,42 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 </div>
                 <div class="menu-item-buttons-container">
                     <span class="menu-item-add-to-cart-button" onclick="addToCartButton(<?= $result[$i]["id"] ?>)">Add to cart</span>
+                    <?php
+                    $userAdmin = $_SESSION['user_admin'];
+                    if ($userAdmin) {
+                    ?>
+                        <span class="menu-item-add-to-cart-button menu-item-update-product-button" productId="<?= $result[$i]['id'] ?>">Update</span>
+                    <?php } ?>
                 </div>
             </div>
         <?php
         }
         ?>
     </section>
+    <?php
+    if ($userAdmin) {
+    ?>
+        <!-- Update Product Admin Section -->
+        <div class="update-product-modal-container">
+            <div class="update-modal-form-container">
+                <input type="text" id="update-product-name" class="update-product-fields-input" />
+                <input type="text" id="update-product-price" class="update-product-fields-input" />
+                <input type="text" id="update-product-count" class="update-product-fields-input" />
+                <label for="update-product-off-price" class="update-product-fields-label">
+                    <span>Off Price:</span>
+                    <input type="checkbox" id="update-product-off-price" class="update-product-fields-input" />
+                </label>
+                <label for="update-product-active" class="update-product-fields-label">
+                    <span>Active:</span>
+                    <input type="checkbox" id="update-product-active" class="update-product-fields-input" />
+                </label>
+                <div class="update-product-fields-buttons-container">
+                    <button class="update-product-button delete-product-button">Delete</button>
+                    <button class="update-product-button" id="update-product-info-button">Update</button>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <?php
     // Include the footer component
     include_once "../components/footer.php";

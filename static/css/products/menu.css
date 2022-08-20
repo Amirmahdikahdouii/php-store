@@ -62,11 +62,6 @@ a {
     justify-content: space-between;
 }
 
-.menu-item-container:hover {
-    transition: all 400ms;
-    background-color: rgba(0, 0, 0, .2);
-}
-
 .menu-item-image-container {
     width: 300px;
     height: 300px;
@@ -161,14 +156,108 @@ a {
     font-size: 15px;
     font-family: our-commitment-title;
     cursor: pointer;
+    transition: all 500ms;
 }
 
 .menu-item-add-to-cart-button:hover {
-    transition: all 500ms;
     color: black;
     background-color: white;
 }
 
+/* Update Product Admin Section Styles */
+
+.menu-item-update-product-button {
+    background-color: #fff;
+    color: #000;
+}
+
+.menu-item-update-product-button:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.update-product-modal-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.update-product-modal-container-active {
+    display: flex;
+}
+
+.update-modal-form-container {
+    width: 40%;
+    padding: 2%;
+    border-radius: 10px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.update-product-fields-input {
+    width: 90%;
+    margin: 1% auto;
+    border: none;
+    border-radius: 10px;
+    padding: 2% 0;
+    padding-left: 1%;
+    font-weight: normal;
+    font-size: 17px;
+    color: #fff;
+    background-color: #000;
+    font-family: header-main-description;
+}
+
+.update-product-fields-label {
+    width: fit-content;
+    margin-left: 5%;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+.update-product-fields-label>span {
+    font-weight: bold;
+    font-size: 17px;
+    font-family: header-main-title;
+    color: #000;
+}
+
+.update-product-fields-label>.update-product-fields-input {
+    width: fit-content;
+    margin-left: 15px;
+}
+
+.update-product-fields-buttons-container {
+    width: 90%;
+    margin: 3% auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.update-product-button {
+    padding: 2% 4%;
+    font-weight: normal;
+    font-size: 18px;
+    font-family: our-commitment-title;
+    border: none;
+    border-radius: 10px;
+    background-color: #6BCB77;
+    color: #fff;
+    cursor: pointer;
+}
+
+.delete-product-button {
+    background-color: #FD5D5D;
+}
 
 .menu-item-plus-button-count,
 .menu-item-minus-button-count,
@@ -288,9 +377,9 @@ a {
         width: 20%;
     }
 
-    .menu-item-plus-button-count > i,
-    .menu-item-minus-button-count > i,
-    .menu-item-delete-button-count > i {
+    .menu-item-plus-button-count>i,
+    .menu-item-minus-button-count>i,
+    .menu-item-delete-button-count>i {
         width: 15px;
         height: 15px;
     }
