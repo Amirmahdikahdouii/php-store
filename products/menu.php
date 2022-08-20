@@ -103,7 +103,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <input type="checkbox" id="update-product-active" class="update-product-fields-input" />
                 </label>
                 <div class="update-product-fields-buttons-container">
-                    <button class="update-product-button delete-product-button">Delete</button>
+                    <button class="update-product-button delete-product-button" id="delete-product-info-button">Delete</button>
                     <button class="update-product-button" id="update-product-info-button">Update</button>
                 </div>
             </div>

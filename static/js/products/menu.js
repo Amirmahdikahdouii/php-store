@@ -49,23 +49,39 @@ updateProductButtons.forEach((element, index) => {
             let UpdateFormValueButton = document.getElementById("update-product-info-button");
             UpdateFormValueButton.addEventListener("click", () => {
                 let updateProductRequest = new XMLHttpRequest();
-                productInfo.productName = updateNameInput.value;
-                productInfo.productPrice = updatePriceInput.value;
-                productInfo.productCount = updateCountInput.value;
+                let productUpdatedInfo = { "productId": productInfo.productId };
+                productUpdatedInfo.productName = updateNameInput.value;
+                productUpdatedInfo.productPrice = updatePriceInput.value;
+                productUpdatedInfo.productCount = updateCountInput.value;
                 if (updateProductOffPrice.checked) {
-                    productInfo.productOff = 1;
+                    productUpdatedInfo.productOff = 1;
                 } else {
-                    productInfo.productOff = 0;
+                    productUpdatedInfo.productOff = 0;
                 }
                 if (updateProductActive.checked) {
-                    productInfo.productActive = 1;
+                    productUpdatedInfo.productActive = 1;
                 } else {
-                    productInfo.productActive = 0;
+                    productUpdatedInfo.productActive = 0;
                 }
-                productInfo = JSON.stringify(productInfo);
+                productUpdatedInfo = JSON.stringify(productUpdatedInfo);
+                updateProductRequest.onload = () => {
+                    location.reload();
+                    // TODO: Update Dom Without Refresh 
+                }
                 updateProductRequest.open("POST", "./admin/updateProductInfo.php");
                 updateProductRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                updateProductRequest.send(`productData=${productInfo}`);
+                updateProductRequest.send(`productData=${productUpdatedInfo}`);
+            })
+            // Delete Product Value From DB
+            let deleteProductButton = document.getElementById("delete-product-info-button");
+            deleteProductButton.addEventListener("click", () => {
+                let deleteProductRequest = new XMLHttpRequest();
+                deleteProductRequest.open("POST", "./admin/deleteProductInfo.php");
+                deleteProductRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                deleteProductRequest.send(`id=${productInfo.productId}`);
+                deleteProductRequest.onload = () => {
+                    location.reload();
+                }
             })
         }
         xhttpRequest.open("GET", `./admin/getProductInfo.php?id=${productId}`);
