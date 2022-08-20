@@ -1,3 +1,17 @@
+// Add to Cart With Ajax and Request
+const addToCartButton = (productId) => {
+    let xhttpRequest = new XMLHttpRequest();
+    xhttpRequest.onload = () => {
+        if (xhttpRequest.status !== 200) {
+            openAlertContainer("Error!", "SomeThing Bad Happend, Please Try Again!", "Try Again", addToCartButton(productId));
+            return null;
+        }
+        openAlertContainer("Message: ", xhttpRequest.responseText);
+    }
+    xhttpRequest.open("GET", `/php-store/cart/addToCart.php?product_id=${productId}`);
+    xhttpRequest.send();
+}
+
 // our-full-menu-header-button
 
 let menuShow = number => {

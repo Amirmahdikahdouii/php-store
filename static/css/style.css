@@ -133,7 +133,7 @@ a {
 }
 
 .header-coffeshop-info-container {
-    padding: 2% 0;
+    padding: 1.5% 0;
     width: 100%;
     display: flex;
     flex-flow: row nowrap;
@@ -143,16 +143,15 @@ a {
 }
 
 .header-coffeshop-info {
-    width: 20%;
+    width: fit-content;
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .header-coffeshop-info-title {
-    padding: 1% 0;
-    margin: 1% 0;
+    margin: 1% 20px;
     width: 90%;
     color: black;
     display: flex;
@@ -162,7 +161,7 @@ a {
     font-family: header-main-description;
 }
 
-.header-coffeshop-info-title > i {
+.header-coffeshop-info-title>i {
     font-size: 18px;
     color: #000;
 }
@@ -193,7 +192,7 @@ a {
     background-color: #6f4d37;
 }
 
-.our-story-image > img {
+.our-story-image>img {
     border-radius: 10px;
 }
 
@@ -305,7 +304,7 @@ a {
     align-items: center;
 }
 
-.our-menu-image-container > img {
+.our-menu-image-container>img {
     border-radius: 10px;
 }
 
@@ -372,7 +371,7 @@ a {
     background-color: #fff;
 }
 
-.book-table-image-container > img {
+.book-table-image-container>img {
     border-radius: 10px;
 }
 
@@ -430,7 +429,7 @@ a {
     cursor: pointer;
 }
 
-.col-7 > input {
+.col-7>input {
     padding: 2%;
     border: none;
     width: 100%;
@@ -442,14 +441,14 @@ a {
     text-align: center;
 }
 
-.col-7 > input::placeholder {
+.col-7>input::placeholder {
     color: white;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
 }
 
-.col-7 > textarea {
+.col-7>textarea {
     padding: 2%;
     border: none;
     width: 100% !important;
@@ -461,7 +460,7 @@ a {
     text-align: center;
 }
 
-.col-7 > textarea::placeholder {
+.col-7>textarea::placeholder {
     color: white;
     font-weight: bold;
     border-radius: 10px;
@@ -550,7 +549,7 @@ a {
     margin: 1% 0 0;
     width: 200px;
     height: 200px;
-    background-color: #fff;
+    background-color: #aaa;
     border-radius: 10px;
     color: black;
     display: flex;
@@ -558,8 +557,11 @@ a {
     align-items: center;
 }
 
-.best-coffe-seller-item-image > img {
+.best-coffe-seller-item-image>img {
     border-radius: 10px;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .best-coffe-seller-item-title {
@@ -938,7 +940,7 @@ a {
         align-items: center;
     }
 
-    .header-coffeshop-info-title > span {
+    .header-coffeshop-info-title>span {
         margin: 8% 0;
         font-weight: bold;
     }
@@ -1047,7 +1049,7 @@ a {
 }
 
 @media screen and (max-width: 900px) {
-    .header-menu-item > a {
+    .header-menu-item>a {
         font-size: 16px;
     }
 }
@@ -1067,7 +1069,7 @@ a {
         justify-content: center;
     }
 
-    .header-coffeshop-info-title > span {
+    .header-coffeshop-info-title>span {
         display: none;
     }
 
@@ -1254,7 +1256,7 @@ a {
         width: 70%;
     }
 
-    .our-commitment-icon > i {
+    .our-commitment-icon>i {
         height: 20px;
         width: 20px;
     }
@@ -1263,10 +1265,10 @@ a {
         width: 30%;
     }
 
-    .col-7 > input::placeholder,
-    .col-7 > input,
-    .col-7 > textarea::placeholder,
-    .col-7 > textarea {
+    .col-7>input::placeholder,
+    .col-7>input,
+    .col-7>textarea::placeholder,
+    .col-7>textarea {
         font-size: 10px;
     }
 
@@ -1275,7 +1277,7 @@ a {
         height: 100px;
     }
 
-    .best-coffe-seller-item-image > img {
+    .best-coffe-seller-item-image>img {
         height: 100%;
     }
 
@@ -1349,9 +1351,9 @@ a {
         width: 20%;
     }
 
-    .menu-item-plus-button-count > i,
-    .menu-item-minus-button-count > i,
-    .menu-item-delete-button-count > i {
+    .menu-item-plus-button-count>i,
+    .menu-item-minus-button-count>i,
+    .menu-item-delete-button-count>i {
         width: 15px;
         height: 15px;
     }

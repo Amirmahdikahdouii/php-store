@@ -115,7 +115,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <?php
         for ($i = 1; $i <= ceil($countOfProducts / $productCountInPage); $i++) {
         ?>
-            <a href="./menu.php?p=<?= $i ?>" class="center page-counter-link <?php if($pageNumber === $i) echo 'page-counter-link-active'; ?>"><?= $i ?></a>
+            <a href="./menu.php?p=<?= $i ?>" class="center page-counter-link <?php if ($pageNumber === $i) echo 'page-counter-link-active'; ?>"><?= $i ?></a>
         <?php } ?>
     </div>
     <?php

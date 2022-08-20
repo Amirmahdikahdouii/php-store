@@ -65,7 +65,7 @@
                         </span>
                     </div>
                     <!-- fillOut This tag with any message if you want! -->
-                    <p class="header-coffeshop-info-description"></p>
+                    <!-- <p class="header-coffeshop-info-description"></p> -->
                 </div>
                 <div class="header-coffeshop-info">
                     <div class="header-coffeshop-info-title">
@@ -75,20 +75,16 @@
                         </span>
                     </div>
                     <!-- fillOut This tag with any message if you want! -->
-                    <p class="header-coffeshop-info-description"></p>
+                    <!-- <p class="header-coffeshop-info-description"></p> -->
                 </div>
 
                 <div class="header-coffeshop-info">
                     <div class="header-coffeshop-info-title">
                         <i class="bi bi-clock-fill"></i>
                         <span>
-                            <?= $result['work_day'] ?>
+                            <?= $result['work_time'] ?>
                         </span>
                     </div>
-                    <p class="header-coffeshop-info-description">
-                        <?= $result['work_time'] ?>
-                    </p>
-
                 </div>
 
             </div>
