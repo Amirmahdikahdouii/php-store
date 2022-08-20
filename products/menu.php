@@ -2,7 +2,29 @@
 // TODO: Pagination and select by category should be add
 session_start();
 include_once "../settings/dbconfig.php";
-$sql = "SELECT * FROM `product` WHERE is_active='1'";
+$productCountInPage = 9;
+if (isset($_GET["p"])) {
+    $pageNumber = intval($_GET["p"]);
+    $sql = "SELECT COUNT(*) FROM `product`";
+    $countOfProducts = mysqli_query($db_connection, $sql);
+    $countOfProducts = mysqli_fetch_assoc($countOfProducts);
+    $countOfProducts = intval($countOfProducts["COUNT(*)"]);
+    if ($pageNumber <= 0 || (($productCountInPage * ($pageNumber - 1)) > $countOfProducts)) {
+        $pageNumber = 1;
+    }
+} else {
+    $pageNumber = 1;
+    $sql = "SELECT COUNT(*) FROM `product`";
+    $countOfProducts = mysqli_query($db_connection, $sql);
+    $countOfProducts = mysqli_fetch_assoc($countOfProducts);
+    $countOfProducts = intval($countOfProducts["COUNT(*)"]);
+    if (($productCountInPage * ($pageNumber - 1)) > $countOfProducts) {
+        $pageNumber = 1;
+    }
+}
+$limitProduct = $pageNumber *  $productCountInPage;
+$beginNumber = ($pageNumber - 1) *  $productCountInPage;
+$sql = "SELECT * FROM `product` WHERE is_active='1' ORDER BY viewCount LIMIT $limitProduct  OFFSET $beginNumber";
 $result = mysqli_query($db_connection, $sql);
 $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
@@ -74,7 +96,11 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
                 <div class="menu-item-buttons-container">
                     <span class="menu-item-add-to-cart-button" onclick="addToCartButton(<?= $result[$i]["id"] ?>)">Add to cart</span>
                     <?php
-                    $userAdmin = $_SESSION['user_admin'];
+                    if (isset($_SESSION['user_admin'])) {
+                        $userAdmin = $_SESSION['user_admin'];
+                    } else {
+                        $userAdmin = false;
+                    }
                     if ($userAdmin) {
                     ?>
                         <span class="menu-item-add-to-cart-button menu-item-update-product-button" productId="<?= $result[$i]['id'] ?>">Update</span>
@@ -85,6 +111,13 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         }
         ?>
     </section>
+    <div class="page-counter-container">
+        <?php
+        for ($i = 1; $i <= ceil($countOfProducts / $productCountInPage); $i++) {
+        ?>
+            <a href="./menu.php?p=<?= $i ?>" class="center page-counter-link <?php if($pageNumber === $i) echo 'page-counter-link-active'; ?>"><?= $i ?></a>
+        <?php } ?>
+    </div>
     <?php
     if ($userAdmin) {
     ?>

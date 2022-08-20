@@ -83,11 +83,7 @@ include_once "../components/alertMessage.php";
         </span>
         <div class="product-rate-container">
             <i class="bi bi-star-fill"></i>
-<<<<<<< HEAD
             <span class="product-rate-mark"><?= number_format($Product["rate"], 1) ?></span>
-=======
-            <span class="product-rate-mark"><?= number_format($Product["rate"], 1, ".") ?></span>
->>>>>>> 13fc9f13ff2ba7b9ccdc88437678ff0a4ac99241
             <span class="product-rate-mark"><span><?= $Product["viewCount"] ?></span> View</span>
             <a href="#comment-section" class="product-rate-mark"><span><?= count($Comments) ?></span> comments</a>
         </div>

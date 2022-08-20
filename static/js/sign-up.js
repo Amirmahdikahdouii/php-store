@@ -17,26 +17,31 @@ submitButton.addEventListener("click", (event) => {
     const checkLengthOfInputValues = (inputValue, validLength, message) => {
         if (inputValue.length > validLength) {
             stopEvent(message);
+            return null;
+
         }
     }
     if (!emailInputValue.match(emailValidationRegex)) {
         stopEvent("Please enter valid E-Mail");
+        return null;
+
     }
     checkLengthOfInputValues(emailInputValue, 50, "email should be maximum 50 character");
     if (passwordInputValue !== confirmPasswordInputValue) {
         stopEvent("Password Field and Confirm Password Field Values are not match!");
+        return null;
     }
     checkLengthOfInputValues(passwordInputValue, 80, "password should be maximum 80 character");
     let xHttpRequest = new XMLHttpRequest();
     xHttpRequest.onload = () => {
-        if(xHttpRequest.status !== 200){
+        if (xHttpRequest.status !== 200) {
             alert("Email already exists!");
             return null;
         }
         alert("User successfully Created");
-        window.location.href = "http://127.0.0.1/php-store-project/Accounts/login.php";
+        window.location.href = "./login.php";
     }
-    xHttpRequest.open("POST", "http://127.0.0.1/php-store-project/Accounts/makeUser.php");
+    xHttpRequest.open("POST", "./makeUser.php");
     xHttpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xHttpRequest.send(`email=${emailInputValue}&password=${passwordInputValue}`);
 })

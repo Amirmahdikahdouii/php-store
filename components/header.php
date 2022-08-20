@@ -24,7 +24,7 @@
         </nav>
     </div>
     <?php
-    if (pathinfo($_SERVER["PHP_SELF"])["basename"] === "index.php") {
+    if ($_SERVER["PHP_SELF"] === "/php-store/index.php") {
         include_once "./settings/dbconfig.php";
         $sql = "SELECT * FROM `index_header_content_container` WHERE is_active='1'";
         $result = mysqli_query($db_connection, $sql);
