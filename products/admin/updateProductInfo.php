@@ -1,14 +1,6 @@
 <?php
 require_once "../../settings/dbconfig.php";
-
-// Check if user is not Admin, redirect to login;
-session_start();
-if (!isset($_SESSION['user_admin'])) {
-    header("Location ../../Accounts/login.php");
-}
-
-// Set a header to a JSON response
-header("Content-Type: application/json; charset=UTF-8");
+include_once "./authenticateAdmin.php";
 
 $JSONResponse = [
     "status" => 0,
@@ -26,6 +18,7 @@ $sql = "UPDATE product SET name='$productName', price='$productPrice', count='$p
 $result = mysqli_query($db_connection, $sql);
 
 // TODO: RESPONSE A JSON TO Request
+
 // $JSONResponse["status"] = 1;
 // $JSONResponse = json_encode($JSONResponse);
 // echo $JSONResponse;

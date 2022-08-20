@@ -124,6 +124,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <!-- Update Product Admin Section -->
         <div class="update-product-modal-container">
             <div class="update-modal-form-container">
+                <i class="bi bi-x-lg" id="close-update-product-modal"></i>
                 <input type="text" id="update-product-name" class="update-product-fields-input" />
                 <input type="text" id="update-product-price" class="update-product-fields-input" />
                 <input type="text" id="update-product-count" class="update-product-fields-input" />
@@ -136,7 +137,7 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     <input type="checkbox" id="update-product-active" class="update-product-fields-input" />
                 </label>
                 <div class="update-product-fields-buttons-container">
-                    <button class="update-product-button delete-product-button" id="delete-product-info-button">Delete</button>
+                    <button class="update-product-button delete-product-button" id="close-update-modal-button">Close</button>
                     <button class="update-product-button" id="update-product-info-button">Update</button>
                 </div>
             </div>

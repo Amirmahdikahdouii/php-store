@@ -31,9 +31,12 @@ updateProductButtons.forEach((element, index) => {
 
         // Ajax Request to module
         let xhttpRequest = new XMLHttpRequest();
+        // In Onload, After getting product data from API, we display our modal to make changes;
         xhttpRequest.onload = () => {
+
             // Get Product Info
             let productInfo = JSON.parse(xhttpRequest.responseText);
+            // Put Product Info in Inputs
             updateNameInput.value = productInfo.productName;
             updatePriceInput.value = parseFloat(productInfo.productPrice);
             updateCountInput.value = parseInt(productInfo.productCount);
@@ -43,6 +46,7 @@ updateProductButtons.forEach((element, index) => {
             if (parseInt(productInfo.productActive)) {
                 updateProductActive.checked = true;
             }
+            // Show the hole modal Container
             updateProductModalContainer.classList.add("update-product-modal-container-active");
 
             // Update Form Values Into DB
@@ -64,25 +68,48 @@ updateProductButtons.forEach((element, index) => {
                     productUpdatedInfo.productActive = 0;
                 }
                 productUpdatedInfo = JSON.stringify(productUpdatedInfo);
+
                 updateProductRequest.onload = () => {
-                    location.reload();
-                    // TODO: Update Dom Without Refresh 
+                    // location.reload();
+
+                    // TODO: Update Dom Without Refresh
+                    // Select product Card
+                    let productCardContainer = document.querySelectorAll(".menu-item-container")[index];
+
+                    // Remove Product Node After deactive Product
+                    closeModalContainer();
+                    openAlertContainer("Updated Successfully", "Product Updated Successfully!");
+                    if (!updateProductActive.checked) {
+                        productCardContainer.remove();
+                        return null;
+                    };
+
+                    // New Request to get new Product Data;
+                    let updateproductDataRequest = new XMLHttpRequest();
+                    updateproductDataRequest.open("GET", `./admin/getProductInfo.php?id=${productId}`);
+                    updateproductDataRequest.send();
+                    updateproductDataRequest.onload = () => {
+                        let newProductInfo = JSON.parse(updateproductDataRequest.responseText);
+                        productCardContainer.querySelector(".menu-item-title").textContent = newProductInfo.productName;
+                        productCardContainer.querySelector(".menu-item-price").innerHTML = `<i class="bi bi-currency-dollar"></i> ${parseFloat(newProductInfo.productPrice).toFixed(2)}`;
+                        if (!updateProductOffPrice.checked) {
+                            productCardContainer.querySelector(".menu-item-old-price").remove();
+                        }
+                    }
                 }
                 updateProductRequest.open("POST", "./admin/updateProductInfo.php");
                 updateProductRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                 updateProductRequest.send(`productData=${productUpdatedInfo}`);
             })
-            // Delete Product Value From DB
-            let deleteProductButton = document.getElementById("delete-product-info-button");
-            deleteProductButton.addEventListener("click", () => {
-                let deleteProductRequest = new XMLHttpRequest();
-                deleteProductRequest.open("POST", "./admin/deleteProductInfo.php");
-                deleteProductRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                deleteProductRequest.send(`id=${productInfo.productId}`);
-                deleteProductRequest.onload = () => {
-                    location.reload();
-                }
-            })
+
+            // Close Modal Container
+            let closeModalButton = document.getElementById("close-update-modal-button");
+            let closeModalIcon = document.getElementById("close-update-product-modal");
+            const closeModalContainer = () => {
+                updateProductModalContainer.classList.remove("update-product-modal-container-active");
+            }
+            closeModalButton.addEventListener("click", closeModalContainer);
+            closeModalIcon.addEventListener("click", closeModalContainer);
         }
         xhttpRequest.open("GET", `./admin/getProductInfo.php?id=${productId}`);
         xhttpRequest.send();
