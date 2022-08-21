@@ -50,7 +50,7 @@
             </div>
         </section>
     <?php } ?>
-
+    <!-- TODO: work with DATABASE for this section and get data from database -->
     <section class="our-commitment-section">
         <div class="our-commitment-item">
             <div class="our-commitment-icon">
@@ -123,6 +123,7 @@
         </section>
     <?php } ?>
 
+    <!-- TODO: work with DATABASE for this section and get data from database -->
     <section class="book-table-section">
         <div class="book-table-image-container">
             <img src="./static/img/coffe-table.jpg" alt="OUR-TABLE" width="100%" />
@@ -221,6 +222,7 @@
     </section>
 
     <section class="best-coffe-sellers-section">
+        <!-- TODO: work with DATABASE for this section and get data from database -->
         <div class="best-coffe-seller-header">
             <h1 class="best-coffe-seller-header-title">Discover</h1>
             <h1 class="best-coffe-seller-header-title">BEST COFFE SELLER</h1>

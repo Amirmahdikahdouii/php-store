@@ -1,8 +1,5 @@
 let mainSection = document.querySelector('.main-section');
 let sideBarMenu = document.getElementById('SideBar-menu-container');
-const changeSideBarHeight = () => {
-    console.log(mainSection.offsetHeight);
-}
 //showContentHandler
 
 showContentHandler = (contentId, tagId) => {
@@ -18,7 +15,6 @@ showContentHandler = (contentId, tagId) => {
     })
     let tag = document.getElementById(tagId);
     tag.className = 'sideBar-menu-item-active';
-    changeSideBarHeight();
 }
 
 // Factors According
@@ -205,3 +201,67 @@ changePasswordFormButton.addEventListener('click', (e) => {
         changePasswordFormButton.parentElement.submit();
     }
 })
+
+// User Cart Section;
+
+// add and remove Count Of product in user cart handler
+const updateProductCountHandler = (productId, index, productStatusChange = 1) => {
+    openloadingSpinner();
+    let addCountProductToUserCartRequest = new XMLHttpRequest();
+    addCountProductToUserCartRequest.open("POST", `/php-store/Accounts/components/addProductCountToUserCart.php`);
+    addCountProductToUserCartRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    addCountProductToUserCartRequest.send(`productId=${productId}&productStatusChange=${productStatusChange}`);
+    addCountProductToUserCartRequest.onload = () => {
+        let response = JSON.parse(addCountProductToUserCartRequest.responseText);
+        let productCountCounter = document.querySelectorAll(".cart-list-item-cart-info-count")[index];
+        if (parseInt(response.status) && addCountProductToUserCartRequest.status === 200) {
+            openAlertContainer("Product Count Updated!", "Product Count Successfully Updated!");
+            productCountCounter.textContent = response.productCount;
+        } else {
+            openAlertContainer("Error", "Something Wrong happend!");
+        }
+    }
+}
+
+// Add count into product cart
+let addUserCartProductButtons = document.querySelectorAll(".cart-list-item-cart-info-plus-count-button");
+addUserCartProductButtons.forEach((button, index) => {
+    let productId = parseInt(button.getAttribute("productId"));
+    button.addEventListener("click", () => {
+        updateProductCountHandler(productId, index, 1)
+    })
+})
+
+// Remove count into product cart
+let removeUserCartProductButtons = document.querySelectorAll(".cart-list-item-cart-info-mines-count-button");
+removeUserCartProductButtons.forEach((button, index) => {
+    let productId = parseInt(button.getAttribute("productId"));
+    button.addEventListener("click", () => {
+        updateProductCountHandler(productId, index, 2);
+    })
+})
+
+// DELETE product From user Cart
+let deleteUserCartProductButtons = document.querySelectorAll(".cart-list-item-cart-info-remove-button");
+deleteUserCartProductButtons.forEach((button, index) => {
+    let productId = parseInt(button.getAttribute("productId"));
+    button.addEventListener("click", () => {
+        openloadingSpinner();
+        let addCountProductToUserCartRequest = new XMLHttpRequest();
+        addCountProductToUserCartRequest.open("POST", `/php-store/Accounts/components/deleteProductCountToUserCart.php`);
+        addCountProductToUserCartRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        addCountProductToUserCartRequest.send(`productId=${productId}`);
+        addCountProductToUserCartRequest.onload = () => {
+            let response = JSON.parse(addCountProductToUserCartRequest.responseText);
+            let productCountCounter = document.querySelectorAll(".cart-list-item")[index];
+            if (parseInt(response.status) && addCountProductToUserCartRequest.status === 200) {
+                openAlertContainer("Product Count Updated!", "Product Count Successfully Updated!");
+                productCountCounter.remove();
+            } else {
+                openAlertContainer("Error", "Something Wrong happend!");
+            }
+        }
+    })
+})
+
+// END User Cart Section;

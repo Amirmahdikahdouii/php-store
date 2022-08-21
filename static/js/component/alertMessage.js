@@ -28,3 +28,8 @@ const openAlertContainer = (alertTitleContent, alertMessageContent, alertButtonC
 }
 
 // Use openAlertContainer() Method to Open And Show Alert to users
+
+// Open Loading Spinner
+const openloadingSpinner = () => {
+    alertContainer.style.display = "flex";
+}
