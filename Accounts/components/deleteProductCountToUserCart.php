@@ -28,7 +28,7 @@ if ($userCartProduct === null) {
     echo $JSONResponse;
     die();
 }
-$userCartProductID = intval($userCartProduct);
+$userCartProductID = intval($userCartProduct['id']);
 // DELETE user product in his cart
 $sql = "DELETE FROM `cart_products` WHERE id='$userCartProductID'";
 $userCartProduct = mysqli_query($db_connection, $sql);
