@@ -39,8 +39,15 @@
                 <p class="our-story-description-text our-story-description-text-mobile">
                     <?= substr($result['main-title'], 0, 100) . "..." ?>
                 </p>
+                <?php if ($result['button_text'] !== "" and $result['button_link'] !== "") {
+                ?>
+                    <div class="our-menu-button-container">
+                        <a class="header-main-button our-menu-button" href="<?= $result['button_link'] ?>"><?= $result['button_text'] ?></a>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
-
         </section>
     <?php } ?>
 
@@ -80,24 +87,41 @@
         </div>
 
     </section>
-
-    <section class="our-menu-section">
-        <div class="our-menu-image-container">
-            <img src="./static/img/coffe-1.jpg" width="100%" alt="OUR-MENU" />
-        </div>
-
-        <div class="our-menu-description">
-            <div class="our-menu-description-title">Discover</div>
-            <div class="our-menu-description-title our-menu-description-title-2">OUR MENU</div>
-            <p class="our-menu-description-text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugit
-                explicabo distinctio officia voluptates! Nulla consequuntur totam perspiciatis, aspernatur sed harum.
-                Magni ea molestias eaque sunt asperiores facere, officiis pariatur eos?</p>
-            <div class="our-menu-button-container">
-                <button class="header-main-button our-menu-button">View Full Menu</button>
+    <?php
+    $sql = "SELECT * FROM `home-page-setions` WHERE is_active='1' AND id='2' LIMIT 1";
+    $result = mysqli_query($db_connection, $sql);
+    $result = mysqli_fetch_assoc($result);
+    if ($result !== null) {
+    ?>
+        <section class="our-menu-section">
+            <div class="our-menu-image-container">
+                <img src="./media/home/img/<?= $result['image'] ?>" alt="<?= $result['main-title'] ?>" />
             </div>
-        </div>
+            <div class="our-menu-description">
+                <h1 class="our-story-description-title">
+                    <?= $result['little-title'] ?>
+                </h1>
+                <h1 class="our-story-description-title our-story-description-title-2">
+                    <?= $result['main-title'] ?>
+                </h1>
+                <p class="our-story-description-text">
+                    <?= $result['text'] ?>
+                </p>
+                <p class="our-story-description-text our-story-description-text-mobile">
+                    <?= substr($result['main-title'], 0, 100) . "..." ?>
+                </p>
 
-    </section>
+                <?php if ($result['button_text'] !== "" and $result['button_link'] !== "") {
+                ?>
+                    <div class="our-menu-button-container">
+                        <a class="header-main-button our-menu-button" href="<?= $result['button_link'] ?>"><?= $result['button_text'] ?></a>
+                    </div>
+                <?php
+                }
+                ?>
+            </div>
+        </section>
+    <?php } ?>
 
     <section class="book-table-section">
         <div class="book-table-image-container">
@@ -234,11 +258,11 @@
         $sql = "SELECT * FROM `home-image-gallery` ORDER BY RAND() LIMIT 4";
         $images = mysqli_query($db_connection, $sql);
         $images = mysqli_fetch_all($images, MYSQLI_ASSOC);
-        foreach($images as $rowIndex => $image){
+        foreach ($images as $rowIndex => $image) {
         ?>
-        <div class="image-gallery-item">
-            <img src="/php-store/media/home/img/<?= $image['image'] ?>" alt="<?= $image['title'] ?>" class="img-of-image-gallery" width="100%" />
-        </div>
+            <div class="image-gallery-item">
+                <img src="/php-store/media/home/img/<?= $image['image'] ?>" alt="<?= $image['title'] ?>" class="img-of-image-gallery" />
+            </div>
         <?php } ?>
     </section>
 
@@ -246,300 +270,83 @@
         <div class="our-full-menu-header-container">
             <h1 class="our-full-menu-header-title">Our Menu</h1>
             <p class="our-full-menu-header-description">Check Our Products !</p>
+            <?php
+            $sql = "SELECT * FROM `product_subcategory` ORDER BY RAND() LIMIT 4";
+            $productCategories = mysqli_query($db_connection, $sql);
+            $productCategories = mysqli_fetch_all($productCategories, MYSQLI_ASSOC);
+            $productCategoriesId = array();
+            ?>
             <div class="our-full-menu-header-button-container">
-                <button class="our-full-menu-header-button our-full-menu-header-button-active" onclick="menuShow(1)">Coffee</button>
-                <button class="our-full-menu-header-button" onclick="menuShow(2)">Drinks</button>
-                <button class="our-full-menu-header-button" onclick="menuShow(3)">Lunch</button>
-                <button class="our-full-menu-header-button" onclick="menuShow(4)">Dinner</button>
+                <?php
+                for ($i = 0; $i < count($productCategories); $i++) {
+                ?>
+                    <button class="our-full-menu-header-button <?php if ($i == 0) echo 'our-full-menu-header-button-active'; ?>" onclick="menuShow(<?= $i + 1 ?>)"><?= $productCategories[$i]['name'] ?></button>
+                <?php
+                    $productCategoriesId[$i] = intval($productCategories[$i]['id']);
+                }
+                ?>
             </div>
         </div>
         <div class="our-full-menu-body-container">
             <?php
-            // $sql = "SELECT * FROM `product` WHERE category_id=''"
+            for ($i = 0; $i < count($productCategoriesId); $i++) {
+                $productCategoryId = $productCategoriesId[$i];
+                $sql = "SELECT * FROM `product` WHERE is_active='1' AND category_id='$productCategoryId' LIMIT 6";
+                $categoryProducts = mysqli_query($db_connection, $sql);
+                $categoryProducts = mysqli_fetch_all($categoryProducts, MYSQLI_ASSOC);
             ?>
-            <div class="our-full-menu-items-container our-full-menu-items-container-active">
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
+                <div class="our-full-menu-items-container <?php if ($i === 0) echo 'our-full-menu-items-container-active'; ?>">
+                    <?php
+                    foreach ($categoryProducts as $productIndex => $product) {
+                    ?>
+                        <div class="menu-item-container">
+                            <a href="./products/product.php?id=<?= $product['id'] ?>" class="center menu-item-image-container">
+                                <img src="./media/product-image/<?= $product['image'] ?>" class="menu-item-image" />
+                            </a>
+                            <div class="menu-item-title-container">
+                                <a href="./products/product.php?id=<?= $product['id'] ?>" class="menu-item-title"><?= $product['name'] ?></a>
+                                <div class="menu-item-price-container">
+                                    <div class="menu-item-prices">
+                                        <?php
+                                        if (intval($product['have_price_with_off'])) {
+                                            $productId = intval($product['id']);
+                                            $sqlToSelectOffPrice = "SELECT * FROM `product_with_off_prices` WHERE product_id='$productId'";
+                                            $selectOffPrice = mysqli_query($db_connection, $sqlToSelectOffPrice);
+                                            $selectOffPrice = mysqli_fetch_assoc($selectOffPrice);
+                                        ?>
+                                            <span class="menu-item-old-price">
+                                                <i class="bi bi-currency-dollar"></i>
+                                                <?= number_format($product['price'], 2) ?>
+                                            </span>
+                                            <span class="menu-item-price">
+                                                <i class="bi bi-currency-dollar"></i>
+                                                <?= number_format($selectOffPrice['new_price'], 2) ?>
+                                            </span>
+                                        <?php } else { ?>
+                                            <span class="menu-item-price">
+                                                <i class="bi bi-currency-dollar"></i>
+                                                <?= number_format($product['price'], 2) ?>
+                                            </span>
+                                        <?php } ?>
+                                    </div>
+                                    <?php
+                                    if (intval($product['have_price_with_off'])) {
+                                        $offPricePercent = ((floatval($product['price']) - floatval($selectOffPrice['new_price'])) * 100) / floatval($product['price']);
+                                        $offPricePercent = number_format($offPricePercent, 1);
+                                    ?>
+                                        <span class="menu-item-price-off center"><?= $offPricePercent ?></span>
+                                    <?php } ?>
+                                </div>
                             </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
+                            <div class="menu-item-buttons-container">
+                                <button class="menu-item-add-to-cart-button" onclick="addToCartButton(<?= $product['id'] ?>)">Add to cart</button>
                             </div>
-                            <span class="menu-item-price-off center">10%</span>
                         </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="menu-item-container">
-                    <div class="menu-item-image-container">
-                        <img src="./static/img/coffe-cup.jpg" width="100%" height="100%" class="menu-item-image" />
-                    </div>
-                    <div class="menu-item-title-container">
-                        <a href="./pages/products.html" class="menu-item-title">Coffee Cup</a>
-                        <div class="menu-item-price-container">
-                            <div class="menu-item-prices">
-                                <span class="menu-item-old-price">$3.00</span>
-                                <span class="menu-item-price">$2.00</span>
-                            </div>
-                            <span class="menu-item-price-off center">10%</span>
-                        </div>
-                    </div>
-                    <div class="menu-item-buttons-container">
-                        <a class="menu-item-add-to-cart-button" href="./pages/cart.html">Add to cart</a>
-                        <div class="menu-item-add-remove-buttons">
-                            <button class="menu-item-plus-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                                </svg>
-                            </button>
-                            <button class="menu-item-delete-button-count center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
-                                    <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php } ?>
             <div class="full-menu-load-more-button-container">
-                <a href="./products/menu.php" class="full-menu-load-more-button">More</a>
+                <a href="./products/menu.php?p=1" class="full-menu-load-more-button">More</a>
             </div>
         </div>
     </section>

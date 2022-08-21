@@ -36,7 +36,7 @@ body {
 }
 
 a {
-    color: black;
+    color: #000;
 }
 
 .center {
@@ -74,7 +74,7 @@ a {
     text-transform: capitalize;
     margin: 1% 0;
     width: fit-content;
-    color: white;
+    color: #fff;
     font-weight: lighter;
     font-size: 40px;
     font-family: welcome;
@@ -85,7 +85,7 @@ a {
     margin: 1% 0;
     padding: 1% 0;
     width: 60%;
-    color: white;
+    color: #fff;
     font-size: 50px;
     font-family: header-main-title;
     text-align: center;
@@ -95,7 +95,7 @@ a {
     margin: 1% 0;
     padding: 1% 0;
     width: 40%;
-    color: white;
+    color: #fff;
     text-align: center;
     font-size: 20px;
     font-family: header-main-description;
@@ -115,7 +115,7 @@ a {
     margin: 0 1%;
     padding: 1% 2.5%;
     background-color: rgba(0, 0, 0, .8);
-    color: white;
+    color: #fff;
     font-weight: bold;
     font-size: 17px;
     font-family: header-main-title;
@@ -123,13 +123,13 @@ a {
     cursor: pointer;
     border-radius: 10px;
     text-transform: capitalize;
+    transition: all 500ms;
 }
 
 .header-main-button:hover {
-    transition: all 500ms;
     border: 1px solid rgba(0, 0, 0, .3);
     color: rgb(90, 46, 6);
-    background-color: white;
+    background-color: #fff;
 }
 
 .header-coffeshop-info-container {
@@ -153,7 +153,7 @@ a {
 .header-coffeshop-info-title {
     margin: 1% 20px;
     width: 90%;
-    color: black;
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -210,7 +210,7 @@ a {
 .our-story-description-title {
     margin: 1% 0;
     padding: .5% 0;
-    color: white;
+    color: #fff;
     font-size: 40px;
     font-family: welcome;
 }
@@ -222,7 +222,7 @@ a {
 .our-story-description-text {
     padding: 1% 0;
     width: 80%;
-    color: white;
+    color: #fff;
     font-size: 18px;
     font-family: header-main-description;
 }
@@ -251,17 +251,17 @@ a {
     justify-content: flex-start;
     align-items: center;
     border-radius: 10px;
+    transition: all 500ms;
 }
 
 .our-commitment-item:hover {
-    transition: all 500ms;
     background-color: rgba(0, 0, 0, .3);
 }
 
 .our-commitment-icon {
     margin: 1% 0 5%;
     padding: 3%;
-    border: .5px solid black;
+    border: .5px solid #000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -271,7 +271,7 @@ a {
 .our-commitment-title {
     padding: 1% 0;
     margin: 1% 0;
-    color: white;
+    color: #fff;
     cursor: default;
     font-family: our-commitment-title;
 }
@@ -289,23 +289,27 @@ a {
     padding: 3% 0 1%;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
-    align-items: flex-start;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .our-menu-image-container {
     padding: .5%;
-    width: 40%;
+    max-width: 40%;
+    height: 500px;
     order: 2;
-    background-color: #6f4d37;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #6f4d37;
 }
 
 .our-menu-image-container>img {
     border-radius: 10px;
+    height: 100%;
+    max-height: 100%;
+    max-width: 100%;
 }
 
 .our-menu-description {
@@ -320,7 +324,7 @@ a {
 .our-menu-description-title {
     margin: 1% 0;
     padding: .5% 0;
-    color: white;
+    color: #fff;
     font-size: 40px;
     font-family: welcome;
 }
@@ -333,7 +337,7 @@ a {
     padding: 1% 0;
     margin-bottom: 5%;
     width: 80%;
-    color: white;
+    color: #fff;
     font-size: 18px;
     font-family: header-main-description;
 }
@@ -422,7 +426,7 @@ a {
 
 
 .book-table-form-label {
-    color: white;
+    color: #fff;
     font-family: our-commitment-title;
     font-weight: bold;
     font-size: 18px;
@@ -435,14 +439,14 @@ a {
     width: 100%;
     height: 20px;
     background-color: rgba(0, 0, 0, .4);
-    color: white;
+    color: #fff;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
 }
 
 .col-7>input::placeholder {
-    color: white;
+    color: #fff;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
@@ -454,14 +458,14 @@ a {
     width: 100% !important;
     height: 100% !important;
     background-color: rgba(0, 0, 0, .4);
-    color: white;
+    color: #fff;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
 }
 
 .col-7>textarea::placeholder {
-    color: white;
+    color: #fff;
     font-weight: bold;
     border-radius: 10px;
     text-align: center;
@@ -471,7 +475,7 @@ a {
     padding: 2% 15%;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, .8);
-    color: white;
+    color: #fff;
     font-weight: bold;
     font-family: header-main-title;
     font-size: 18px;
@@ -482,7 +486,7 @@ a {
 .book-table-button:hover {
     transition: all 1s;
     background-color: rgba(255, 255, 255, .8);
-    color: black;
+    color: #000;
 }
 
 .best-coffe-sellers-section {
@@ -513,7 +517,7 @@ a {
 }
 
 .best-coffe-seller-header-title:nth-child(2) {
-    color: white;
+    color: #fff;
     font-family: our-commitment-title;
     font-size: 40px;
 }
@@ -521,7 +525,7 @@ a {
 .best-coffe-seller-header-text {
     margin: 3% 0;
     width: 60%;
-    color: white;
+    color: #fff;
     text-align: center;
     font-size: 18px;
 }
@@ -551,7 +555,7 @@ a {
     height: 200px;
     background-color: #aaa;
     border-radius: 10px;
-    color: black;
+    color: #000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -570,7 +574,7 @@ a {
     width: 100%;
     text-align: center;
     font-weight: bold;
-    color: white;
+    color: #fff;
     font-size: 20px;
     font-family: header-main-title;
 }
@@ -579,7 +583,7 @@ a {
     margin: .5% 0;
     padding: 1% 0;
     width: 80%;
-    color: white;
+    color: #fff;
     text-align: center;
     font-family: header-main-description;
     font-size: 16px;
@@ -591,7 +595,7 @@ a {
     width: 100%;
     text-align: center;
     font-weight: bold;
-    color: white;
+    color: #fff;
     font-size: 18px;
     font-family: header-main-title;
 }
@@ -610,7 +614,7 @@ a {
     padding: 5% 8%;
     background-color: rgba(0, 0, 0, .7);
     border-radius: 10px;
-    color: white;
+    color: #fff;
     font-weight: bold;
     font-size: 15px;
     font-family: our-commitment-title;
@@ -619,8 +623,8 @@ a {
 
 .best-coffe-seller-item-button:hover {
     transition: all 500ms;
-    color: black;
-    background-color: white;
+    color: #000;
+    background-color: #fff;
 }
 
 .image-gallery-section {
@@ -634,16 +638,19 @@ a {
 }
 
 .image-gallery-item {
-    width: 17%;
-    padding: 2%;
+    width: 20%;
+    padding: 1%;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: #fff;
     border-radius: 10px;
 }
 
 .img-of-image-gallery {
+    height: 100%;
+    max-width: 100%;
     border-radius: 10px;
 }
 
@@ -668,7 +675,7 @@ a {
 }
 
 .our-full-menu-header-title {
-    color: white;
+    color: #fff;
     font-size: 50px;
     font-weight: bold;
     font-family: header-main-title;
@@ -678,7 +685,7 @@ a {
 .our-full-menu-header-description {
     padding: 1% 0;
     width: 70%;
-    color: white;
+    color: #fff;
     text-align: center;
     font-size: 18px;
     font-weight: bold;
@@ -703,21 +710,21 @@ a {
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    background-color: black;
-    color: white;
+    background-color: #000;
+    color: #fff;
     font-size: 15px;
     font-family: our-commitment-title;
 }
 
 .our-full-menu-header-button-active {
-    background-color: white;
-    color: black;
+    background-color: #fff;
+    color: #000;
 }
 
 .our-full-menu-header-button:hover {
     transition: all 700ms;
-    background-color: white;
-    color: black;
+    background-color: #fff;
+    color: #000;
 }
 
 .our-full-menu-body-container {
@@ -732,12 +739,13 @@ a {
 }
 
 .our-full-menu-items-container {
-    width: 100%;
+    width: 90%;
+    margin: 1% auto;
     height: 100%;
     display: none;
     grid-template-columns: repeat(3, auto);
     grid-template-rows: repeat(3, auto);
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .our-full-menu-items-container-active {
@@ -745,28 +753,29 @@ a {
 }
 
 .menu-item-container {
+    margin: 1% 20px;
+    width: 300px;
     padding: 1%;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    transition: all 400ms;
 }
 
 .menu-item-container:hover {
-    transition: all 400ms;
     background-color: rgba(0, 0, 0, .2);
 }
 
 .menu-item-image-container {
-    width: 300px;
-    height: 300px;
-    max-width: 300px;
-    max-height: 300px;
+    width: 250px;
+    height: 250px;
     margin: 2% auto 1%;
-    padding: 1%;
     border-radius: 10px;
 }
 
 .menu-item-image {
+    height: 100%;
+    max-width: 100%;
     border-radius: 10px;
 }
 
@@ -800,7 +809,7 @@ a {
 .menu-item-price,
 .menu-item-old-price {
     margin: 2% 0 0;
-    color: white;
+    color: #fff;
     font-family: header-main-description;
     font-weight: bold;
     font-size: 20px;
@@ -810,7 +819,7 @@ a {
     width: 35px;
     height: 35px;
     background-color: rgb(214, 31, 31);
-    color: white;
+    color: #fff;
     font-weight: bolder;
     font-size: 15px;
     font-family: header-main-description;
@@ -842,7 +851,7 @@ a {
     padding: 5% 8%;
     background-color: rgba(0, 0, 0, .7);
     border-radius: 10px;
-    color: white;
+    color: #fff;
     font-weight: bold;
     font-size: 15px;
     font-family: our-commitment-title;
@@ -851,8 +860,8 @@ a {
 
 .menu-item-add-to-cart-button:hover {
     transition: all 500ms;
-    color: black;
-    background-color: white;
+    color: #000;
+    background-color: #fff;
 }
 
 
@@ -870,7 +879,7 @@ a {
 
 .menu-item-minus-button-count,
 .menu-item-delete-button-count {
-    color: white;
+    color: #fff;
     background-color: #a80e1b;
 }
 
@@ -880,7 +889,7 @@ a {
 }
 
 .menu-item-plus-button-count {
-    color: white;
+    color: #fff;
     background-color: rgba(5, 131, 210, .8);
 }
 
@@ -902,7 +911,7 @@ a {
     border: none;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, .6);
-    color: white;
+    color: #fff;
     font-weight: bolder;
     font-size: 18px;
     font-family: our-commitment-title;
@@ -1038,10 +1047,8 @@ a {
     }
 
     .menu-item-image-container {
-        width: 250px;
-        height: 250px;
-        max-width: 250px;
-        max-height: 250px;
+        height: 100%;
+        max-width: 100%;
         margin: 2% auto 1%;
         padding: 1%;
         border-radius: 10px;
