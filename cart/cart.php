@@ -79,14 +79,14 @@ if (isset($_SESSION['user_id'])) {
                             </div>
                             <div class="center cart-list-item-count-container">
                                 <!-- TODO:Make add, remove and delete product with ajax and by click on buttons -->
-                                <button class="center cart-list-item-delete-button <?php if ($countOfProduct === 1) echo 'cart-list-item-button-active' ?>">
+                                <button class="center cart-list-item-delete-button" productID="<?= $product["id"] ?>">
                                     <i class="bi bi-trash"></i>
                                 </button>
-                                <button class="center cart-list-item-mines-button <?php if ($countOfProduct > 1) echo 'cart-list-item-button-active' ?>">
+                                <button class="center cart-list-item-mines-button <?php if ($countOfProduct === 1) echo 'cart-list-item-cart-info-plus-count-button-deactive' ?>" productID="<?= $product["id"] ?>">
                                     <i class="bi bi-dash-lg"></i>
                                 </button>
-                                <span class="cart-list-item-count center"><?= $countOfProduct; ?></span>
-                                <button class="center cart-list-item-plus-button cart-list-item-button-active">
+                                <span class="center cart-list-item-count"><?= $countOfProduct; ?></span>
+                                <button class="center cart-list-item-plus-button <?php if ($countOfProduct === 10) echo 'cart-list-item-cart-info-plus-count-button-deactive' ?>" productID="<?= $product["id"] ?>">
                                     <i class="bi bi-plus-lg"></i>
                                 </button>
                             </div>
@@ -194,7 +194,7 @@ if (isset($_SESSION['user_id'])) {
     include_once "../components/footer.php";
     include_once "../components/mainScript.php";
     ?>
-    <script src="../static/js/cart.js"></script>
+    <script src="/php-store/static/js/cart/cart.js"></script>
 </body>
 
 </html>
