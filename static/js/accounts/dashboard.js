@@ -271,7 +271,7 @@ deleteUserCartProductButtons.forEach((button, index) => {
             let response = JSON.parse(addCountProductToUserCartRequest.responseText);
             let productCountCounter = document.querySelectorAll(".cart-list-item")[index];
             if (parseInt(response.status) && addCountProductToUserCartRequest.status === 200) {
-                openAlertContainer("Product Count Updated!", "Product Count Successfully Updated!");
+                openAlertContainer("Done!", "Product have been removed from your cart!");
                 productCountCounter.remove();
             } else {
                 openAlertContainer("Error", "Something Wrong happend!");
