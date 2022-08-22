@@ -360,6 +360,16 @@ body {
     background-color: rgba(187, 27, 27, 1);
 }
 
+
+.cart-list-item-cart-info-plus-count-button-deactive {
+    background-color: #000; 
+    cursor: default;
+}
+
+.cart-list-item-cart-info-plus-count-button-deactive:hover {
+    background-color: #000;
+}
+
 .cart-list-item-cart-info-remove-button {
     padding: 4% 6%;
     font-size: 17px;

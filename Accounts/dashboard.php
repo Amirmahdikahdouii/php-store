@@ -177,10 +177,10 @@ $userBirthday = $result['birthday'];
                         <div class="cart-list-item-cart-info-container">
                             <span class="cart-list-item-cart-info-count"><?= $productCountInCart ?></span>
                             <div class="cart-list-item-cart-info-buttons-container">
-                                <button class="center cart-list-item-cart-info-plus-count-button" productId="<?= $userCartProduct['id'] ?>">
+                                <button class="center cart-list-item-cart-info-plus-count-button <?php if ($productCountInCart === 10) echo 'cart-list-item-cart-info-plus-count-button-deactive' ?>" productId="<?= $userCartProduct['id'] ?>">
                                     <i class="bi- bi-plus-lg"></i>
                                 </button>
-                                <button class="center cart-list-item-cart-info-mines-count-button" productId="<?= $userCartProduct['id'] ?>">
+                                <button class="center cart-list-item-cart-info-mines-count-button <?php if ($productCountInCart === 1) echo 'cart-list-item-cart-info-plus-count-button-deactive' ?>" productId="<?= $userCartProduct['id'] ?>">
                                     <i class="bi- bi-dash-lg"></i>
                                 </button>
                             </div>

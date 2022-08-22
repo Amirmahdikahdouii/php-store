@@ -205,7 +205,10 @@ changePasswordFormButton.addEventListener('click', (e) => {
 // User Cart Section;
 
 // add and remove Count Of product in user cart handler
-const updateProductCountHandler = (productId, index, productStatusChange = 1) => {
+const updateProductCountHandler = (button, productId, index, productStatusChange = 1) => {
+    if ([...button.classList].indexOf("cart-list-item-cart-info-plus-count-button-deactive") !== -1) {
+        return null;
+    }
     openloadingSpinner();
     let addCountProductToUserCartRequest = new XMLHttpRequest();
     addCountProductToUserCartRequest.open("POST", `/php-store/Accounts/components/addProductCountToUserCart.php`);
@@ -215,10 +218,23 @@ const updateProductCountHandler = (productId, index, productStatusChange = 1) =>
         let response = JSON.parse(addCountProductToUserCartRequest.responseText);
         let productCountCounter = document.querySelectorAll(".cart-list-item-cart-info-count")[index];
         if (parseInt(response.status) && addCountProductToUserCartRequest.status === 200) {
-            openAlertContainer("Product Count Updated!", "Product Count Successfully Updated!");
+            openAlertContainer(response.title, response.messageText);
             productCountCounter.textContent = response.productCount;
+            if (parseInt(response.productCount) === 1) {
+                let minusButton = document.querySelectorAll(".cart-list-item-cart-info-mines-count-button")[index];
+                minusButton.classList.add('cart-list-item-cart-info-plus-count-button-deactive');
+            } else if (parseInt(response.productCount) === 2) {
+                let minusButton = document.querySelectorAll(".cart-list-item-cart-info-mines-count-button")[index];
+                minusButton.classList.remove('cart-list-item-cart-info-plus-count-button-deactive');
+            } else if (parseInt(response.productCount) === 10) {
+                let plusButton = document.querySelectorAll(".cart-list-item-cart-info-plus-count-button")[index];
+                plusButton.classList.add('cart-list-item-cart-info-plus-count-button-deactive');
+            } else if (parseInt(response.productCount) === 9) {
+                let plusButton = document.querySelectorAll(".cart-list-item-cart-info-plus-count-button")[index];
+                plusButton.classList.remove('cart-list-item-cart-info-plus-count-button-deactive');
+            }
         } else {
-            openAlertContainer("Error", "Something Wrong happend!");
+            openAlertContainer(response.title, response.messageText);
         }
     }
 }
@@ -228,7 +244,7 @@ let addUserCartProductButtons = document.querySelectorAll(".cart-list-item-cart-
 addUserCartProductButtons.forEach((button, index) => {
     let productId = parseInt(button.getAttribute("productId"));
     button.addEventListener("click", () => {
-        updateProductCountHandler(productId, index, 1)
+        updateProductCountHandler(button, productId, index, 1)
     })
 })
 
@@ -237,7 +253,7 @@ let removeUserCartProductButtons = document.querySelectorAll(".cart-list-item-ca
 removeUserCartProductButtons.forEach((button, index) => {
     let productId = parseInt(button.getAttribute("productId"));
     button.addEventListener("click", () => {
-        updateProductCountHandler(productId, index, 2);
+        updateProductCountHandler(button, productId, index, 2);
     })
 })
 
