@@ -4,7 +4,9 @@
 include_once '../settings/dbconfig.php';
 session_start();
 // Select User Cart if user is login
+$userLogin = false;
 if (isset($_SESSION['user_id'])) {
+    $userLogin = true;
     $user_id = intval($_SESSION["user_id"]);
     // Select User Cart
     $sql = "SELECT * FROM cart WHERE user_id='$user_id'";
@@ -178,7 +180,17 @@ if (isset($_SESSION['user_id'])) {
                         <span>(<?= number_format($percentOffInAllPrice, 1) ?>%)</span>
                     </span>
                 </div>
-                <button class="continue-shopping-button">Continue</button>
+                <?php
+                if ($userLogin) {
+                ?>
+                    <button class="continue-shopping-button" id="confirm-shoping-button" userID="<?= $user_id ?>" cartID="<?= $cart_id ?>">Continue</button>
+                <?php
+                } else {
+                ?>
+                    <a href="/php-store/Accounts/login.php" class="continue-shopping-button">Login to Continue</a>
+                <?php
+                }
+                ?>
             </aside>
         </section>
     <?php
@@ -193,6 +205,11 @@ if (isset($_SESSION['user_id'])) {
     }
     include_once "../components/footer.php";
     include_once "../components/mainScript.php";
+    if ($userLogin and count($result) > 0) {
+    ?>
+        <script src="/php-store/static/js/cart/confirmCartShopping.js"></script>
+    <?php
+    }
     ?>
     <script src="/php-store/static/js/cart/cart.js"></script>
 </body>
