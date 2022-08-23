@@ -4,7 +4,7 @@ include_once "./authenticationCheck.php";
 require_once "../../settings/dbconfig.php";
 // TODO: Make This Page More Secure!;
 
-$JSONResponse = ['status' => 1, 'productCount' => $productCountInUserCart];
+$JSONResponse = ['status' => 1];
 $userID = intval($_SESSION['user_id']);
 $productID = intval($_POST['productId']);
 if ($productID <= 0) {

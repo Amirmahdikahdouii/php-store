@@ -5,6 +5,17 @@ require_once "../../settings/dbconfig.php";
 
 // TODO: Make This Page More Secure!;
 $JSONResponse = ['status' => 0, "title" => "", "message" => ""];
+function returnResponse($title, $message, $status = 0)
+{
+    global $JSONResponse;
+    $JSONResponse['status'] = $status;
+    $JSONResponse['title'] = $title;
+    $JSONResponse['message'] = $message;
+    $JSONResponse = json_encode($JSONResponse);
+    echo $JSONResponse;
+    die();
+}
+
 $userID = intval($_SESSION['user_id']);
 
 if (
@@ -13,11 +24,7 @@ if (
     !isset($_POST['birthday']) or
     !isset($_POST['phoneNumber'])
 ) {
-    $JSONResponse['title'] = "Error";
-    $JSONResponse['message'] = "Form Is not valid!";
-    $JSONResponse = json_encode($JSONResponse);
-    echo $JSONResponse;
-    die();
+    returnResponse("Error", "Form Is not valid!");
 }
 
 // Select User Data From DataBase
@@ -36,19 +43,11 @@ $userPhoneNumber = $_POST['phoneNumber'];
 if (isset($_FILES['profileImage'])) {
     $userProfile = $_FILES['profileImage'];
     if ($_FILES['profileImage']['type'] !== "image/jpg" && $_FILES['profileImage']['type'] !== "image/jpeg") {
-        $JSONResponse['title'] = "Error";
-        $JSONResponse['message'] = "Image Is not valid! Image File Type Should be .jpg or .jpeg";
-        $JSONResponse = json_encode($JSONResponse);
-        echo $JSONResponse;
-        die();
+        returnResponse("Error", "Image Is not valid! Image File Type Should be .jpg or .jpeg");
     }
 
     if (intval($userProfile['size']) > 5000000) {
-        $JSONResponse['title'] = "Error";
-        $JSONResponse['message'] = "Image Size is too large! Maximum size is 4 Mg";
-        $JSONResponse = json_encode($JSONResponse);
-        echo $JSONResponse;
-        die();
+        returnResponse("Error", "Image Size is too large! Maximum size is 4 Mg");
     }
 
     // Generate Profile Image Name
@@ -58,11 +57,7 @@ if (isset($_FILES['profileImage'])) {
     // Set Profile Upload Path
     include_once "../../media/user-profile-pictures/directoryPath.php";
     if (!move_uploaded_file($userProfile["tmp_name"], $profileUserPath . $profileImageName)) {
-        $JSONResponse['title'] = "Error";
-        $JSONResponse['message'] = "File Doesnt Uploaded";
-        $JSONResponse = json_encode($JSONResponse);
-        echo $JSONResponse;
-        die();
+        returnResponse("Error", "File Doesnt Uploaded");
     } else {
         // Delete user past profile!
         $userPastImage = $userpastData['profile_image'];
@@ -75,15 +70,6 @@ if (isset($_FILES['profileImage'])) {
 $sql = "UPDATE `account` SET `name`='$userName', family_name='$userFamilyName', phone_number='$userPhoneNumber', birthday='$userBirthday', profile_image='$profileImageName' WHERE id='$userID'";
 $updateUserInfo = mysqli_query($db_connection, $sql);
 if (!$updateUserInfo) {
-    $JSONResponse['title'] = "Error";
-    $JSONResponse['message'] = "Update Data Failed!";
-    $JSONResponse = json_encode($JSONResponse);
-    echo $JSONResponse;
-    die();
+    returnResponse("Error", "Update Data Failed!");
 }
-$JSONResponse['status'] = 1;
-$JSONResponse['title'] = "Successful!";
-$JSONResponse['message'] = "Your Profile Have been Updated!";
-$JSONResponse = json_encode($JSONResponse);
-echo $JSONResponse;
-die();
+returnResponse("Successful!", "Your Profile Have been Updated!", 1);

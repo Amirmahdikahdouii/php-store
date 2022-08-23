@@ -12,7 +12,18 @@
                 <li class="header-menu-item"><a href="/php-store/index.php">Home</a></li>
                 <li class="header-menu-item"><a href="/php-store/products/menu.php">Menu</a></li>
                 <li class="header-menu-item"><a href="/php-store/pages/blog.html">Blog</a></li>
-                <li class="header-menu-item"><a href="/php-store/Accounts/login.php">Account</a></li>
+                <?php
+                session_start();
+                if (isset($_SESSION['user_login'])) {
+                ?>
+                    <li class="header-menu-item"><a href="/php-store/Accounts/dashboard.php">Dashboard</a></li>
+                <?php
+                } else {
+                ?>
+                    <li class="header-menu-item"><a href="/php-store/Accounts/login.php">Account</a></li>
+                <?php
+                }
+                ?>
                 <li class="header-menu-item"><a href="/php-store/pages/about-us.html">About</a></li>
                 <li class="header-menu-item"><a href="/php-store/pages/contact-us.html">Contact</a></li>
                 <li class="header-menu-item">

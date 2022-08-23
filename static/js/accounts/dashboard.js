@@ -146,31 +146,6 @@ function UserAddressMethod() {
 }
 UserAddressMethod();
 
-// Check new password and confirm password inputes "Change Password Section"
-
-let changePasswordFormButton = document.querySelector('.change-password-form-submit-button');
-
-changePasswordFormButton.addEventListener('click', (e) => {
-    let oldPassword = document.getElementById('change-password-form-old-password');
-    let newPassword = document.getElementById('change-password-form-new-password');
-    let newPasswordConfirm = document.getElementById('change-password-form-new-password-confirm');
-    if (newPassword.value === "" || newPasswordConfirm.value === "" || oldPassword.value === "") {
-        alert("Password Feilds are Empty!");
-        oldPassword.style.border = '1px solid red';
-        newPassword.style.border = '1px solid red';
-        newPasswordConfirm.style.border = '1px solid red';
-    }
-    else if (newPassword.value !== newPasswordConfirm.value) {
-        alert('New Passwords Feilds Value are not match!');
-        newPassword.style.border = '1px solid red';
-        newPasswordConfirm.style.border = '1px solid red';
-        return null;
-    } else {
-        alert('Password Successfully changed!');
-        changePasswordFormButton.parentElement.submit();
-    }
-})
-
 // User Cart Section;
 
 // add and remove Count Of product in user cart handler
@@ -274,12 +249,12 @@ submitChangeUserInfoButton.addEventListener('click', () => {
     let userProfilePhotoInput = document.getElementById("change-personal-info-form-profile-photo");
     let photos = userProfilePhotoInput.files;
     let photo = photos[0];
-    if([...photos].length > 0){
-        if(!photo.type.match("image.*")){
+    if ([...photos].length > 0) {
+        if (!photo.type.match("image.*")) {
             openAlertContainer("Error", "file Uploaded is not an image!");
             return null;
         }
-    }else{
+    } else {
         photo = null;
     }
     // Create Form Node
@@ -288,17 +263,45 @@ submitChangeUserInfoButton.addEventListener('click', () => {
     formNode.append("familyName", userFamilyNameInput.value);
     formNode.append("birthday", userBirthdayInput.value);
     formNode.append("phoneNumber", userPhoneNumberInput.value);
-    if(photo === null){
+    if (photo === null) {
         formNode.append("profileImage", "");
-    }else{
+    } else {
         formNode.append("profileImage", photo, photo.name);
     }
     // Create AJAX Request
     let sendFormRequest = new XMLHttpRequest();
     sendFormRequest.open("POST", "./components/updateUserPersonalInfo.php");
     sendFormRequest.send(formNode);
-    sendFormRequest.onload = ()=>{
+    sendFormRequest.onload = () => {
         let responseJson = JSON.parse(sendFormRequest.responseText);
         openAlertContainer(responseJson.title, responseJson.message);
+    }
+})
+// End Section Of change Personal info Section
+
+// change Password Section
+let submitChangePasswordButton = document.getElementById("change-password-button");
+submitChangePasswordButton.addEventListener("click", () => {
+    let oldPasswordInput = document.getElementById("change-password-form-old-password");
+    let newPasswordInput = document.getElementById("change-password-form-new-password");
+    let confirmNewPasswordInput = document.getElementById("change-password-form-confirm-new-password");
+    // Check the input values to not be empty
+    if (newPasswordInput.value === "" || oldPasswordInput.value === "") {
+        openAlertContainer("Warning", "feilds Should not be Empty!");
+        return null;
+    }
+    // check new password and confirm new password field to be the same
+    if (newPasswordInput.value !== confirmNewPasswordInput.value) {
+        openAlertContainer("Warning", "New Password and Confirm Password Feild are not the same!");
+        return null;
+    }
+    // create new AJAX request to send data
+    let sendDataRequest = new XMLHttpRequest();
+    sendDataRequest.open("POST", "./components/changeUserPassword.php");
+    sendDataRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    sendDataRequest.send(`oldPassword=${oldPasswordInput.value}&newPassword=${newPasswordInput.value}&confirmNewPassword=${confirmNewPasswordInput.value}`);
+    sendDataRequest.onload = () => {
+        let JSONResponse = JSON.parse(sendDataRequest.responseText);
+        openAlertContainer(JSONResponse.title, JSONResponse.message);
     }
 })
