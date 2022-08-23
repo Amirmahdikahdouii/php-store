@@ -293,3 +293,4 @@ submitChangePasswordButton.addEventListener("click", () => {
         openAlertContainer(JSONResponse.title, JSONResponse.message);
     }
 })
+// End Section of change password

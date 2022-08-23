@@ -12,6 +12,11 @@ $userPhoneNumber = $result['phone_number'];
 $userProfileImage = $result['profile_image'];
 $userLocation = $result['location'];
 $userBirthday = $result['birthday'];
+if (isset($_SESSION['user_admin'])) {
+    $userAdmin = true;
+} else {
+    $userAdmin = false;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +70,13 @@ $userBirthday = $result['birthday'];
                     <li class="sideBar-menu-item"><span onclick="showContentHandler('main-section-content-container-addresses', 'addresses')" id="addresses">Addresses</span></li>
                     <li class="sideBar-menu-item"><span onclick="showContentHandler('main-section-content-container-change-personal-info', 'change-personal-info')" id="change-personal-info">Change Personal Info</span></li>
                     <li class="sideBar-menu-item"><span onclick="showContentHandler('main-section-content-container-change-password', 'change-password')" id="change-password">Change Password</span></li>
-                    <li class="sideBar-menu-item"><span>Settings</span></li>
+                    <?php
+                    if ($userAdmin) {
+                    ?>
+                        <li class="sideBar-menu-item"><span onclick="showContentHandler('main-section-content-container-add-new-product-admin', 'admin-add-new-product-button')" id='admin-add-new-product-button'>Add New Product</span></li>
+                    <?php
+                    }
+                    ?>
                     <li class="sideBar-menu-item"><a href="./logout.php">Exit</a></li>
                 </ul>
             </div>
@@ -810,13 +821,70 @@ $userBirthday = $result['birthday'];
                 <button class="change-password-form-submit-button" id="change-password-button" type="button">Confirm</button>
             </div>
         </div>
+        <?php
+        if ($userAdmin) {
+        ?>
 
+            <div class="main-section-content-container" id="main-section-content-container-add-new-product-admin">
+                <h1 class="main-section-content-title">Add new Product</h1>
+                <div class="change-personal-info">
+                    <div class="change-personal-info-form-row center">
+                        <div class="change-personal-info-form-column center">
+                            <label for="add-new-product-name" class="change-personal-info-form-label">Name</label>
+                        </div>
+                        <div class="change-personal-info-form-column center">
+                            <input type="text" name="name" id="add-new-product-name" class="change-personal-info-form-input" placeholder="Product Name">
+                        </div>
+                    </div>
+                    <div class="change-personal-info-form-row center">
+                        <div class="change-personal-info-form-column center">
+                            <label for="add-new-product-count" class="change-personal-info-form-label">Count</label>
+                        </div>
+                        <div class="change-personal-info-form-column center">
+                            <input type="number" name="family-name" id="add-new-product-count" class="change-personal-info-form-input" min='0' placeholder="0">
+                        </div>
+                    </div>
+                    <div class="change-personal-info-form-row center">
+                        <div class="change-personal-info-form-column center">
+                            <label for="select-product-categories" class="change-personal-info-form-label">Category</label>
+                        </div>
+                        <div class="change-personal-info-form-column center">
+                            <select id="select-product-categories"></select>
+                        </div>
+                    </div>
+                    <div class="change-personal-info-form-row center">
+                        <div class="change-personal-info-form-column center">
+                            <label for="add-new-product-price" class="change-personal-info-form-label">Price</label>
+                        </div>
+                        <div class="change-personal-info-form-column center">
+                            <input type="number" id="add-new-product-price" class="change-personal-info-form-input" placeholder="0.00">
+                        </div>
+                    </div>
+                    <div class="change-personal-info-form-row center">
+                        <div class="change-personal-info-form-column center">
+                            <label for="add-new-product-photo" class="change-personal-info-form-label">Image</label>
+                        </div>
+                        <div class="change-personal-info-form-column center">
+                            <input type="file" id="add-new-product-photo" class="change-personal-info-form-input">
+                        </div>
+                    </div>
+                    <button class="change-personal-info-form-submit-button" type="submit" id="add-new-product-submit-button">Confirm</button>
+                </div>
+            </div>
+        <?php
+        }
+        ?>
     </section>
     <?php
     // Include Footer
     include_once "../components/footer.php";
     // Include Main Scripts
     include_once "../components/mainScript.php";
+    if ($userAdmin) {
+    ?>
+        <script src="/php-store/static/js/accounts/admin.js"></script>
+    <?php
+    }
     ?>
     <script src="/php-store/static/js/accounts/dashboard.js"></script>
 
