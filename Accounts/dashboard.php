@@ -739,7 +739,7 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-name" class="change-personal-info-form-label">Name</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="text" name="name" id="change-personal-info-form-name" class="change-personal-info-form-input" <?php if ($userName === null) { ?> placeholder="Name" <?php } else { ?> value="<?= $userName ?>" <?php } ?>>
+                        <input type="text" name="name" id="change-personal-info-form-name" class="change-personal-info-form-input" <?php if ($userName === null || $userName === "") { ?> placeholder="Name" <?php } else { ?> value="<?= $userName ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
@@ -747,7 +747,7 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-family-name" class="change-personal-info-form-label">Family Name</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="text" name="family-name" id="change-personal-info-form-family-name" class="change-personal-info-form-input" <?php if ($userFamilyName === null) { ?> placeholder="Family Name" <?php } else { ?> value="<?= $userFamilyName ?>" <?php } ?>>
+                        <input type="text" name="family-name" id="change-personal-info-form-family-name" class="change-personal-info-form-input" <?php if ($userFamilyName === null || $userFamilyName === "") { ?> placeholder="Family Name" <?php } else { ?> value="<?= $userFamilyName ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
@@ -763,7 +763,7 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-phoneNumber" class="change-personal-info-form-label">Phone</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="text" name="phone-number" id="change-personal-info-form-phoneNumber" class="change-personal-info-form-input" <?php if ($userPhoneNumber === null) { ?> placeholder="Phone Number" <?php } else { ?> value="<?= $userPhoneNumber ?>" <?php } ?>>
+                        <input type="text" name="phone-number" id="change-personal-info-form-phoneNumber" class="change-personal-info-form-input" <?php if ($userPhoneNumber === null || $userPhoneNumber === "") { ?> placeholder="Phone Number" <?php } else { ?> value="<?= $userPhoneNumber ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
