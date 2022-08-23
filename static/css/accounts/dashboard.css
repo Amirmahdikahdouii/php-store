@@ -104,7 +104,8 @@ body {
 
 .sideBar-menu-user-profile-photo-holder {
     margin: 2% 0;
-    width: 50%;
+    width: 150px;
+    height: 150px;
     padding: 1%;
     background-color: #fff;
     border-radius: 50%;
@@ -113,6 +114,9 @@ body {
 
 .sideBar-menu-user-profile-photo {
     border-radius: 50%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
 }
 
 .sideBar-menu-user-profile-photo-username {
@@ -507,6 +511,7 @@ body {
     color: rgb(71, 70, 70);
     font-weight: normal;
     font-size: 15px;
+    font-family: header-main-title;
 }
 
 .factor-item-menu-botton {
