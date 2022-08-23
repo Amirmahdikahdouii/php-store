@@ -146,37 +146,6 @@ function UserAddressMethod() {
 }
 UserAddressMethod();
 
-
-// Change profile Info
-
-let changeProfileInfoButton = document.querySelector('.change-personal-info-form-submit-button');
-let personalInfoSpans = [...document.getElementsByClassName('dashboard-section-info-item-value')];
-changeProfileInfoButton.addEventListener('click', (event) => {
-    let changeInformationsinputes = [...document.getElementsByClassName('change-personal-info-form-input')];
-    for (let index = 0; index < changeInformationsinputes.length; index++) {
-        if (changeInformationsinputes[index].value === '') {
-            alert(`Plaese Fill the ${changeInformationsinputes[index].name} input!`);
-            event.preventDefault()
-            return null;
-        }
-    }
-    let changedUserName = document.getElementById('change-personal-info-form-username');
-    let changedName = document.getElementById('change-personal-info-form-name');
-    let changedAge = document.getElementById('change-personal-info-form-birthday');
-    let changedEmail = document.getElementById('change-personal-info-form-email');
-    let changedPhone = document.getElementById('change-personal-info-form-phoneNumber');
-    let changedProfilePhoto = document.getElementById('change-personal-info-form-profile-photo');
-    let UsernameField = document.querySelector('.sideBar-menu-user-profile-photo-username');
-    UsernameField.textContent = changedUserName.value;
-    personalInfoSpans[0].textContent = changedName.value;
-    personalInfoSpans[1].textContent = changedAge.value;
-    personalInfoSpans[2].textContent = changedEmail.value;
-    personalInfoSpans[3].textContent = changedPhone.value;
-    document.querySelector('.sideBar-menu-user-profile-photo').src = window.URL.createObjectURL(changedProfilePhoto.files[0])
-    alert('Informations successfuly changed!');
-});
-
-
 // Check new password and confirm password inputes "Change Password Section"
 
 let changePasswordFormButton = document.querySelector('.change-password-form-submit-button');
@@ -281,3 +250,55 @@ deleteUserCartProductButtons.forEach((button, index) => {
 })
 
 // END User Cart Section;
+
+// Change User Personal Info Section
+let submitChangeUserInfoButton = document.querySelector(".change-personal-info-form-submit-button");
+submitChangeUserInfoButton.addEventListener('click', () => {
+    // let submitFormStatus = 0;
+    // openAlertContainer("Alert!", "Are You Sure you Want submit Changes?", "Yes", () => {
+    //     submitFormStatus = 1;
+    //     alertContainer.style.display = "none";
+    //     alertBodyContainer.style.display = "none";
+    //     loadingSpinner.style.display = "block";
+    // });
+    // if (submitFormStatus === 0) {
+    //     // Return Null if user doesnt submit alert
+    //     return null;
+    // }
+
+    // Get Input Nodes
+    let userNameInput = document.getElementById("change-personal-info-form-name");
+    let userFamilyNameInput = document.getElementById("change-personal-info-form-family-name");
+    let userBirthdayInput = document.getElementById("change-personal-info-form-birthday");
+    let userPhoneNumberInput = document.getElementById("change-personal-info-form-phoneNumber");
+    let userProfilePhotoInput = document.getElementById("change-personal-info-form-profile-photo");
+    let photos = userProfilePhotoInput.files;
+    let photo = photos[0];
+    if([...photos].length > 0){
+        if(!photo.type.match("image.*")){
+            openAlertContainer("Error", "file Uploaded is not an image!");
+            return null;
+        }
+    }else{
+        photo = null;
+    }
+    // Create Form Node
+    let formNode = new FormData();
+    formNode.append("name", userNameInput.value);
+    formNode.append("familyName", userFamilyNameInput.value);
+    formNode.append("birthday", userBirthdayInput.value);
+    formNode.append("phoneNumber", userPhoneNumberInput.value);
+    if(photo === null){
+        formNode.append("profileImage", "");
+    }else{
+        formNode.append("profileImage", photo, photo.name);
+    }
+    // Create AJAX Request
+    let sendFormRequest = new XMLHttpRequest();
+    sendFormRequest.open("POST", "./components/updateUserPersonalInfo.php");
+    sendFormRequest.send(formNode);
+    sendFormRequest.onload = ()=>{
+        let responseJson = JSON.parse(sendFormRequest.responseText);
+        openAlertContainer(responseJson.title, responseJson.message);
+    }
+})

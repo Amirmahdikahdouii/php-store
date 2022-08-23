@@ -1,7 +1,7 @@
 <?php
 include_once '../settings/dbconfig.php';
 session_start();
-$userId = $_SESSION['user_id'];
+$userId = intval($_SESSION['user_id']);
 $sql = "SELECT * FROM account WHERE id='$userId';";
 $result = mysqli_query($db_connection, $sql);
 $result = mysqli_fetch_assoc($result);
@@ -134,7 +134,7 @@ $userBirthday = $result['birthday'];
                 <?php
                 }
                 ?>
-                <button id="edit-personal-info-button" onclick="showContentHandler('main-section-content-container-change-personal-info', 'edit-personal-info-button')">Edit Prodile</button>
+                <button id="edit-personal-info-button" onclick="showContentHandler('main-section-content-container-change-personal-info', 'change-personal-info')">Edit Prodile</button>
             </ul>
         </div>
 
@@ -733,21 +733,21 @@ $userBirthday = $result['birthday'];
 
         <div class="main-section-content-container" id="main-section-content-container-change-personal-info">
             <h1 class="main-section-content-title">Change Personal Info</h1>
-            <form class="change-personal-info">
-                <div class="change-personal-info-form-row center">
-                    <div class="change-personal-info-form-column center">
-                        <label for="change-personal-info-form-username" class="change-personal-info-form-label">Username</label>
-                    </div>
-                    <div class="change-personal-info-form-column center">
-                        <input type="text" name="username" id="change-personal-info-form-username" class="change-personal-info-form-input" placeholder="Username">
-                    </div>
-                </div>
+            <div class="change-personal-info">
                 <div class="change-personal-info-form-row center">
                     <div class="change-personal-info-form-column center">
                         <label for="change-personal-info-form-name" class="change-personal-info-form-label">Name</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="text" name="name" id="change-personal-info-form-name" class="change-personal-info-form-input" placeholder="Name">
+                        <input type="text" name="name" id="change-personal-info-form-name" class="change-personal-info-form-input" <?php if ($userName === null) { ?> placeholder="Name" <?php } else { ?> value="<?= $userName ?>" <?php } ?>>
+                    </div>
+                </div>
+                <div class="change-personal-info-form-row center">
+                    <div class="change-personal-info-form-column center">
+                        <label for="change-personal-info-form-family-name" class="change-personal-info-form-label">Family Name</label>
+                    </div>
+                    <div class="change-personal-info-form-column center">
+                        <input type="text" name="family-name" id="change-personal-info-form-family-name" class="change-personal-info-form-input" <?php if ($userFamilyName === null) { ?> placeholder="Family Name" <?php } else { ?> value="<?= $userFamilyName ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
@@ -755,15 +755,7 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-birthday" class="change-personal-info-form-label">Birthday</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="date" name="birthday" id="change-personal-info-form-birthday" class="change-personal-info-form-input">
-                    </div>
-                </div>
-                <div class="change-personal-info-form-row center">
-                    <div class="change-personal-info-form-column center">
-                        <label for="change-personal-info-form-email" class="change-personal-info-form-label">E-Mail</label>
-                    </div>
-                    <div class="change-personal-info-form-column center">
-                        <input type="text" name="email" id="change-personal-info-form-email" class="change-personal-info-form-input" placeholder="E-Mail">
+                        <input type="date" name="birthday" id="change-personal-info-form-birthday" class="change-personal-info-form-input" <?php if ($userBirthday === null) { ?> placeholder="mm/ dd/ yyyy" <?php } else { ?> value="<?= $userBirthday ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
@@ -771,7 +763,7 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-phoneNumber" class="change-personal-info-form-label">Phone</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="text" name="phone-number" id="change-personal-info-form-phoneNumber" class="change-personal-info-form-input" placeholder="Phone Number">
+                        <input type="text" name="phone-number" id="change-personal-info-form-phoneNumber" class="change-personal-info-form-input" <?php if ($userPhoneNumber === null) { ?> placeholder="Phone Number" <?php } else { ?> value="<?= $userPhoneNumber ?>" <?php } ?>>
                     </div>
                 </div>
                 <div class="change-personal-info-form-row center">
@@ -779,11 +771,11 @@ $userBirthday = $result['birthday'];
                         <label for="change-personal-info-form-profile-photo" class="change-personal-info-form-label">Profile Photo</label>
                     </div>
                     <div class="change-personal-info-form-column center">
-                        <input type="file" name="profile-photo" id="change-personal-info-form-profile-photo" class="change-personal-info-form-input" placeholder="File">
+                        <input type="file" name="profile-photo" id="change-personal-info-form-profile-photo" class="change-personal-info-form-input">
                     </div>
                 </div>
-                <button class="change-personal-info-form-submit-button" type="button">Confirm</button>
-            </form>
+                <button class="change-personal-info-form-submit-button" type="submit">Confirm</button>
+            </div>
         </div>
 
         <div class="main-section-content-container" id="main-section-content-container-change-password">
