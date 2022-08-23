@@ -229,18 +229,6 @@ deleteUserCartProductButtons.forEach((button, index) => {
 // Change User Personal Info Section
 let submitChangeUserInfoButton = document.querySelector(".change-personal-info-form-submit-button");
 submitChangeUserInfoButton.addEventListener('click', () => {
-    // let submitFormStatus = 0;
-    // openAlertContainer("Alert!", "Are You Sure you Want submit Changes?", "Yes", () => {
-    //     submitFormStatus = 1;
-    //     alertContainer.style.display = "none";
-    //     alertBodyContainer.style.display = "none";
-    //     loadingSpinner.style.display = "block";
-    // });
-    // if (submitFormStatus === 0) {
-    //     // Return Null if user doesnt submit alert
-    //     return null;
-    // }
-
     // Get Input Nodes
     let userNameInput = document.getElementById("change-personal-info-form-name");
     let userFamilyNameInput = document.getElementById("change-personal-info-form-family-name");
