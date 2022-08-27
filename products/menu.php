@@ -125,8 +125,11 @@ $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
         <div class="update-product-modal-container">
             <div class="update-modal-form-container">
                 <i class="bi bi-x-lg" id="close-update-product-modal"></i>
+                <label class="update-product-fields-label" for="update-product-name">Name:</label>
                 <input type="text" id="update-product-name" class="update-product-fields-input" />
+                <label class="update-product-fields-label" for="update-product-price">Price:</label>
                 <input type="text" id="update-product-price" class="update-product-fields-input" />
+                <label class="update-product-fields-label" for="update-product-count">Count:</label>
                 <input type="text" id="update-product-count" class="update-product-fields-input" />
                 <label for="update-product-off-price" class="update-product-fields-label">
                     <span>Off Price:</span>

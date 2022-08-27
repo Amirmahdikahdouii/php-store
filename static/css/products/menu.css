@@ -188,7 +188,7 @@ a {
     justify-content: center;
 }
 
-#close-update-product-modal{
+#close-update-product-modal {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -233,6 +233,7 @@ a {
     justify-content: flex-start;
 }
 
+.update-product-fields-label,
 .update-product-fields-label>span {
     font-weight: bold;
     font-size: 17px;

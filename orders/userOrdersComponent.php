@@ -111,6 +111,14 @@ if (count($userOrders) > 0) {
             ?>
         </div>
     <?php
+    } else {
+    ?>
+        <div class="factors-container">
+            <h1 class="user-empty-cart-products-message">
+                Your Orders List Is Empty!
+            </h1>
+        </div>
+    <?php
     }
     ?>
 </div>

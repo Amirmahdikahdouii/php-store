@@ -208,19 +208,21 @@ if (isset($_SESSION['user_admin'])) {
                             </div>
                             <button class="cart-list-item-cart-info-remove-button" productId="<?= $userCartProduct['id'] ?>">Remove</button>
                         </div>
-                        <a class="cart-list-item-product-button" href="./products.html">See Product</a>
+                        <a class="cart-list-item-product-button" href="/php-store/products/product.php?id=<?= $userCartProduct['id'] ?>">See Product</a>
                     </div>
-            <?php
+                <?php
                 }
                 echo "</div>";
+                ?>
+                <div class="see-full-cart-button-container center">
+                    <a class="cart-list-item-button" href="/php-store/cart/cart.php">See Full Cart</a>
+                </div>
+            <?php
             }
             ?>
-            <div class="see-full-cart-button-container center">
-                <a class="cart-list-item-button" href="./cart.html">See Full Cart</a>
-            </div>
         </div>
         <?php
-        // include User Factors Component
+        // include User Factors Component And Orders Component!
         include_once "../factors/userFactorComponent.php";
         include_once "../orders/userOrdersComponent.php";
         ?>
