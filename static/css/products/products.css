@@ -797,8 +797,7 @@ Related Product Section Style
     cursor: pointer;
 }
 
-.comment-like-dislike-container > i:last-child {
-    display: none;
+.comment-like-dislike-container > i {
     color: red;
     font-weight: bolder;
     font-size: 20px;

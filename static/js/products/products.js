@@ -99,60 +99,13 @@ carouselPreviousButton.addEventListener('click', (e) => {
     carouselProductCards[firstActiveItemIndex].className = 'carousel-product-card carousel-product-card-active';
 })
 
-// product-more-detail-table-read-more-button handler
-
-let productsDetailTableRows = document.getElementsByClassName('product-more-detail-table-row');
-for (let i = 0; i <= 3; i++) {
-    productsDetailTableRows[i].style.display = 'flex';
-}
-
-let productDetailTableReadMoreButton = document.getElementById('product-more-detail-table-read-more-button');
-let productDetailTableReadLessButton = document.getElementById('product-more-detail-table-read-less-button');
-
-productDetailTableReadMoreButton.addEventListener('click', () => {
-    productDetailTableReadLessButton.style.display = 'block';
-    productDetailTableReadMoreButton.style.display = 'none';
-    for (let i = 0; i <= productsDetailTableRows.length; i++) {
-        productsDetailTableRows[i].style.display = 'flex';
-    }
-});
-
-productDetailTableReadLessButton.addEventListener('click', () => {
-    productDetailTableReadMoreButton.style.display = 'block';
-    productDetailTableReadLessButton.style.display = 'none';
-    [...productsDetailTableRows].forEach(productsDetailTableRow => {
-        productsDetailTableRow.style.display = 'none';
-    });
-    for (let i = 0; i <= 3; i++) {
-        productsDetailTableRows[i].style.display = 'flex';
-    }
-});
-
-// like-dislike comments icon
-
-let unlikeCommentsIcons = document.getElementsByClassName('bi-heart'),
-    likeCommentsIcons = document.getElementsByClassName('bi-heart-fill');
-[...unlikeCommentsIcons].forEach(unlikeCommentIcon => {
-    unlikeCommentIcon.addEventListener('click', () => {
-        unlikeCommentIcon.style.display = 'none'
-        unlikeCommentIcon.nextElementSibling.style.display = 'block'
-    })
-});
-
-[...likeCommentsIcons].forEach(likeCommentsIcon => {
-    likeCommentsIcon.addEventListener('click', () => {
-        likeCommentsIcon.style.display = 'none';
-        likeCommentsIcon.previousElementSibling.style.display = 'block';
-    })
-})
-
 // New Comment Star rate
 
 let newCommentStars = [...document.getElementsByClassName('new-comments-star')];
 let newCommentStarsFill = [...document.getElementsByClassName('new-comments-star-fill')];
 let newCommentStarMarkSpan = document.getElementById('rate-the-product-star-mark')
 
-let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
+const newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
     let i;
     newCommentStars.map(starIcon => {
         starIcon.onclick = () => {
@@ -163,7 +116,8 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
             i = newCommentStars.indexOf(starIcon);
             for (let starFillIndex = 0; starFillIndex <= i; starFillIndex++) {
                 newCommentStarsFill[starFillIndex].style.display = 'inline-block';
-                newCommentStarMarkSpan.innerText = `${starFillIndex + 1}.0`
+                newCommentStarMarkSpan.innerText = `${starFillIndex + 1}.0`;
+                setCommentMarkRate(starFillIndex + 1);
             }
         }
     });
@@ -172,6 +126,7 @@ let newCommentStarFillHandler = (newCommentStars, newCommentStarsFill) => {
             i = newCommentStarsFill.indexOf(starFillIcon);
             i++
             newCommentStarMarkSpan.innerText = `${i}.0`;
+            setCommentMarkRate(i);
             for (i; i < newCommentStarsFill.length; i++) {
                 newCommentStarsFill[i].style.display = 'none';
                 newCommentStars[i].style.display = 'inline-block';
@@ -248,21 +203,6 @@ const sendCommentButtonHandler = () => {
         responseJson = JSON.parse(responseJson);
         if (parseInt(responseJson["statusCode"])) {
             openAlertContainer(responseJson["title"], responseJson["responseMessage"]);
-            setTimeout(() => {
-                let commentContainer = document.querySelector(".past-comment-item");
-                let commentTitle = commentContainer.querySelector(".past-comment-item-title");
-                let commentMessage = commentContainer.querySelector(".comment-item-message");
-                let commentUserName = commentContainer.querySelector(".comment-item-user");
-                let userRateMark = commentContainer.querySelector(".user-rate-mark");
-                formData = JSON.parse(formData);
-                commentTitle.textContent = formData.title;
-                commentMessage.textContent = formData.message;
-                commentUserName.textContent = "";
-                userRateMark.textContent = formData.rateMark;
-                let pastCommentContainer = document.querySelector(".past-comments-container");
-                pastCommentContainer.appendChild(commentContainer);
-                // TODO: Star Fill Should be active
-            }, 3000);
         } else {
             openAlertContainer(responseJson["title"], responseJson["responseMessage"], "Try Again", sendCommentButtonHandler);
         }
@@ -274,3 +214,35 @@ const sendCommentButtonHandler = () => {
     xHttpRequest.send(`formData=${formData}`);
 }
 sendCommentButton.addEventListener('click', sendCommentButtonHandler);
+
+// Like Comment Section
+let likeCommentIcon = document.querySelectorAll(".comment-like-dislike-container>.bi-heart");
+let likeCommentIconFill = document.querySelectorAll(".comment-like-dislike-container>.bi-heart-fill");
+likeCommentIcon.forEach((icon, index) => {
+    let commentID = icon.getAttribute("commentID");
+    icon.addEventListener("click", () => {
+        // Validate The commentID and UserID
+        if (parseInt(commentID) < 1) {
+            openAlertContainer("Error", "Comment ID is not Valid!");
+            return;
+        }
+        // Make Json object for sending data!
+        let commentData = {
+            "commentID": commentID,
+        }
+        commentData = JSON.stringify(commentData);
+        // make new ajax request
+        let likeCommentRequest = new XMLHttpRequest();
+        likeCommentRequest.open("POST", "/php-store/products/components/likeComment.php");
+        likeCommentRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        likeCommentRequest.send(`data=${commentData}`);
+        likeCommentRequest.onload = () => {
+            let responseJson = JSON.parse(likeCommentRequest.responseText);
+            openAlertContainer(responseJson.title, responseJson.message);
+            if (parseInt(responseJson.status)) {
+                icon.classList.remove("bi-heart");
+                icon.classList.add("bi-heart-fill");
+            }
+        }
+    })
+})
