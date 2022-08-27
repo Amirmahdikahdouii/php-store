@@ -58,7 +58,7 @@ if (isset($_FILES['profileImage'])) {
     include_once "../../media/user-profile-pictures/directoryPath.php";
     if (!move_uploaded_file($userProfile["tmp_name"], $profileUserPath . $profileImageName)) {
         returnResponse("Error", "File Doesnt Uploaded");
-    } else {
+    } else if ($userpastData['profile_image'] !== "default.png") {
         // Delete user past profile!
         $userPastImage = $userpastData['profile_image'];
         unlink($profileUserPath . $userPastImage);
