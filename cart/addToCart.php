@@ -110,12 +110,14 @@ if (isset($_SESSION["userCart"][$productId])) {
     $productCount++;
     $_SESSION["userCart"][$productId] = $productCount;
 } else {
+    // make A new Array when userCart not set!
     if (!isset($_SESSION["userCart"])) {
         $_SESSION["userCart"] = [
             $productId => 1
         ];
     } else {
-        array_push($_SESSION["userCart"], [$productId => 1]);
+        // Push To existing ProductCart
+        $_SESSION["userCart"][$productId] = 1;
     }
 }
 die("Product Added To your Cart, Login To see Your Cart");

@@ -26,17 +26,11 @@
                 ?>
                 <li class="header-menu-item"><a href="/php-store/pages/about-us.html">About</a></li>
                 <li class="header-menu-item"><a href="/php-store/pages/contact-us.html">Contact</a></li>
-                <?php
-                if (isset($_SESSION['user_login'])) {
-                ?>
-                    <li class="header-menu-item">
-                        <a href="/php-store/cart/cart.php">
-                            <i class="bi bi-cart"></i>
-                        </a>
-                    </li>
-                <?php
-                }
-                ?>
+                <li class="header-menu-item">
+                    <a href="/php-store/cart/cart.php">
+                        <i class="bi bi-cart"></i>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

@@ -9,13 +9,16 @@ if (
     header('Location: dashboard.php');
 }
 ?>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="../static/css/login.css"/>
+    <script src="../static/js/accounts/addProductsToCart.js"></script>
 </head>
+
 <body class="body">
 <section class="main-container">
     <!--  User Not Found Modal  -->
@@ -45,7 +48,8 @@ if (
 </section>
 <?php
 include_once "../settings/dbconfig.php";
-if (isset($_POST['email']) &&
+if (
+    isset($_POST['email']) &&
     isset($_POST['password']) &&
     array_key_exists("email", $_POST) &&
     array_key_exists("password", $_POST)
@@ -58,9 +62,39 @@ if (isset($_POST['email']) &&
         $result = mysqli_fetch_assoc($result);
         $_SESSION['user_id'] = intval($result['id']);
         $_SESSION['user_login'] = true;
-        // Check This Section later
         if (intval($result['is_admin']) === 1) {
             $_SESSION['user_admin'] = true;
+        }
+        // Make Cart For User With get Cart Products From Session
+        $userID = intval($result['id']);
+        function getUserCart()
+        {
+            global $db_connection;
+            global $userID;
+            $sql = "SELECT * FROM `cart` WHERE user_id='$userID'";
+            $userCart = mysqli_query($db_connection, $sql);
+            $userCart = mysqli_fetch_assoc($userCart);
+            return $userCart;
+        }
+
+        $userCart = getUserCart();
+        if ($userCart === null) {
+            $sql = "INSERT INTO `cart` (user_id) VALUES ('$userID')";
+            $userCart = mysqli_query($db_connection, $sql);
+        }
+        if (!isset($_SESSION['userCart'])) {
+            header('Location: dashboard.php');
+        }
+        $userCartProducts = $_SESSION['userCart'];
+        $_SESSION['userCart'] = [];
+        foreach ($userCartProducts as $productID => $productCount) {
+            for ($productCounter = 1; $productCounter <= intval($productCount); $productCounter++) {
+                ?>
+                <script>
+                    addToCartButtonHandler("<?= $productID ?>");
+                </script>
+                <?php
+            }
         }
         header('Location: dashboard.php');
     } else {
@@ -74,4 +108,5 @@ if (isset($_POST['email']) &&
 ?>
 <script src="../static/js/login.js"></script>
 </body>
+
 </html>
