@@ -268,7 +268,12 @@ a {
     border-radius: 10%;
 }
 
+.our-commitment-icon>i {
+    font-size: 30px;
+}
+
 .our-commitment-title {
+    text-transform: uppercase;
     padding: 1% 0;
     margin: 1% 0;
     color: #fff;
@@ -514,9 +519,11 @@ a {
     text-align: center;
     font-family: welcome;
     font-size: 50px;
+    text-transform: capitalize;
 }
 
 .best-coffe-seller-header-title:nth-child(2) {
+    text-transform: uppercase;
     color: #fff;
     font-family: our-commitment-title;
     font-size: 40px;
@@ -528,6 +535,8 @@ a {
     color: #fff;
     text-align: center;
     font-size: 18px;
+    font-family: our-commitment-title;
+    text-transform: capitalize;
 }
 
 .best-coffe-seller-footer {
@@ -540,12 +549,13 @@ a {
 }
 
 .best-coffe-seller-footer-item {
+    height: 400px;
     padding: 2% 0;
     width: 20%;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
 
 .best-coffe-seller-item-image {

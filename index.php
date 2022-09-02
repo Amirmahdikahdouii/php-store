@@ -50,42 +50,35 @@
             </div>
         </section>
     <?php } ?>
-    <!-- TODO: work with DATABASE for this section and get data from database -->
+
+    <!-- Our Commitments Section -->
     <section class="our-commitment-section">
-        <div class="our-commitment-item">
-            <div class="our-commitment-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-bag-check" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
-                    <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z" />
-                </svg>
+        <?php
+        $sql = "SELECT * FROM home_commitments_info ORDER BY id DESC LIMIT 3";
+        $ourCommitmentsResult = mysqli_query($db_connection, $sql);
+        $ourCommitmentsResult = mysqli_fetch_all($ourCommitmentsResult, MYSQLI_ASSOC);
+        foreach ($ourCommitmentsResult as $index => $commitmentsRow) {
+        ?>
+            <div class="our-commitment-item">
+                <div class="our-commitment-icon">
+                    <?php
+                    if ($index === 0) {
+                        echo '<i class="bi bi-bag-check"></i>';
+                    } else if ($index === 1) {
+                        echo '<i class="bi bi-cup"></i>';
+                    } else {
+                        echo '<i class="bi bi-truck"></i>';
+                    }
+                    ?>
+                </div>
+                <h1 class="our-commitment-title"><?= $commitmentsRow['title'] ?></h1>
+                <p class="our-commitment-text">
+                    <?= $commitmentsRow['text'] ?>
+                </p>
             </div>
-            <h1 class="our-commitment-title">EASY TO ORDER</h1>
-            <p class="our-commitment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus hic
-                illo, eos veritatis velit corporis.</p>
-        </div>
-
-        <div class="our-commitment-item">
-            <div class="our-commitment-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-cup" viewBox="0 0 16 16">
-                    <path d="M1 2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v1h.5A1.5 1.5 0 0 1 16 4.5v7a1.5 1.5 0 0 1-1.5 1.5h-.55a2.5 2.5 0 0 1-2.45 2h-8A2.5 2.5 0 0 1 1 12.5V2zm13 10h.5a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.5-.5H14v8zM13 2H2v10.5A1.5 1.5 0 0 0 3.5 14h8a1.5 1.5 0 0 0 1.5-1.5V2z" />
-                </svg>
-            </div>
-            <h1 class="our-commitment-title">HIGH QUALITY</h1>
-            <p class="our-commitment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus hic
-                illo, eos veritatis velit corporis.</p>
-        </div>
-
-        <div class="our-commitment-item">
-            <div class="our-commitment-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-                    <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                </svg>
-            </div>
-            <h1 class="our-commitment-title">FAST DELIVERY</h1>
-            <p class="our-commitment-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus hic
-                illo, eos veritatis velit corporis.</p>
-        </div>
-
+        <?php
+        }
+        ?>
     </section>
     <?php
     $sql = "SELECT * FROM `home-page-setions` WHERE is_active='1' AND id='2' LIMIT 1";
@@ -222,13 +215,17 @@
     </section>
 
     <section class="best-coffe-sellers-section">
-        <!-- TODO: work with DATABASE for this section and get data from database -->
+        <?php
+        $sql = "SELECT * FROM home_best_coffee_seller ORDER BY id DESC LIMIT 1";
+        $result = mysqli_query($db_connection, $sql);
+        $result = mysqli_fetch_assoc($result);
+        ?>
         <div class="best-coffe-seller-header">
-            <h1 class="best-coffe-seller-header-title">Discover</h1>
-            <h1 class="best-coffe-seller-header-title">BEST COFFE SELLER</h1>
-            <p class="best-coffe-seller-header-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-                asperiores suscipit nesciunt, in perspiciatis sunt. Ab consectetur pariatur quod a, ullam iusto magnam
-                in consequuntur?</p>
+            <h1 class="best-coffe-seller-header-title"><?= $result['main_title'] ?></h1>
+            <h1 class="best-coffe-seller-header-title"><?= $result['title'] ?></h1>
+            <p class="best-coffe-seller-header-text">
+                <?= $result['text'] ?>
+            </p>
         </div>
         <div class="best-coffe-seller-footer">
             <?php
@@ -243,10 +240,27 @@
                     </a>
                     <a href="./products/product.php?id=<?= $product['id'] ?>" class="best-coffe-seller-item-title"><?= $product['name'] ?></a>
                     <p class="best-coffe-seller-item-text"></p>
-                    <span class="best-coffe-seller-item-title">
-                        <i class="bi bi-currency-dollar"></i>
-                        <?= number_format($product['price'], 2) ?>
-                    </span>
+                    <?php
+                    if (intval($product['have_price_with_off'])) {
+                        $productId = intval($product['id']);
+                        $sqlToSelectOffPrice = "SELECT * FROM `product_with_off_prices` WHERE product_id='$productId'";
+                        $selectOffPrice = mysqli_query($db_connection, $sqlToSelectOffPrice);
+                        $selectOffPrice = mysqli_fetch_assoc($selectOffPrice);
+                    ?>
+                        <span class="menu-item-old-price">
+                            <i class="bi bi-currency-dollar"></i>
+                            <?= number_format($product['price'], 2) ?>
+                        </span>
+                        <span class="menu-item-price">
+                            <i class="bi bi-currency-dollar"></i>
+                            <?= number_format($selectOffPrice['new_price'], 2) ?>
+                        </span>
+                    <?php } else { ?>
+                        <span class="menu-item-price">
+                            <i class="bi bi-currency-dollar"></i>
+                            <?= number_format($product['price'], 2) ?>
+                        </span>
+                    <?php } ?>
                     <div class="best-coffe-seller-item-button-container">
                         <button class="best-coffe-seller-item-button" onclick="addToCartButton(<?= $product['id'] ?>)">Add To Cart</button>
                     </div>
