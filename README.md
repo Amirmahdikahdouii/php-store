@@ -10,11 +10,17 @@ PHP store back-End and Front-End project.
 </pre>
 # TODO:
 <ol>
-<li>Configure DataBase Of project</li>
-<li>Dashboard Section</li>
-<li>Cart Section for put data in DB</li>
-<li>Product Section</li>
-<li>Transaction section to put data in db</li>
+<li>Admin Panel</li>
+<li>Admin Management on every things in page</li>
+<li>Add Menu Category for menu.php</li>
+<li>Add filter Products for menu.php</li>
+<li>Search Bar</li>
+<li>Add Loadmore Comments In products.php</li>
+<li>Manage Order Product In products.php To save suger free and cup size of products</li>
+<li>Add Address for users</li>
+<li>About us and contact us page</li>
+<li>Responsive The Template</li>
+<li>Footer Data Getting with database</li>
 <li>factor Section</li>
 <li>Blog Section</li>
 </ol>
